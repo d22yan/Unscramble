@@ -14,6 +14,7 @@ std::string Utility::ToLowerCase(std::string input) {
 
 std::string Utility::SortCharacters(std::string input){
 	std::string SortedCharacters = input;
+	std::sort(input.begin(), input.end());
 	return SortedCharacters;
 }
 

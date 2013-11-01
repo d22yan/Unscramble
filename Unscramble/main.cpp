@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 
+// http://www.tc.umn.edu/~ringx004/mapm-main.html
 #include <M_APM.H>
 #include <boost\dynamic_bitset\dynamic_bitset.hpp>
 
@@ -17,9 +18,8 @@
 #include "StringCombination.h"
 
 void main(int argc, char** argv) {
-	std::cout << "ASD" << std::endl;
-	//m_apm_cpp_precision(256);
 	Unscramble test = Unscramble();
 	test.UnscrambleString("seNSitizinghprey");
+	StringCombination::ListCombination("asd");
 	std::cin.ignore();
 }
