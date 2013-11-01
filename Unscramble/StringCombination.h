@@ -3,21 +3,23 @@
 
 class StringCombination {
 	public:
-		static std::list<std::string> ListCombination(std::string);
+		static void ListCombination(std::string);
 };
 
-std::list<std::string> StringCombination::ListCombination(std::string word) {
-	std::list<std::string> list;
-	std::string sortedstring;
+void StringCombination::ListCombination(std::string word) {
 	int StringLength = word.length();
+	std::list<std::string> list;
+	std::string SortedString= Utility::SortCharacters(word);
 	std::vector<char> WordVector;
 	for( int i = 0; i < StringLength; i++) {
-		WordVector.push_back(word[i]);
+		WordVector.push_back(SortedString[i]);
 	}
-	//todo compile time const expression
-
-	boost::dynamic_bitset<> x(3);
-	return list;
+	boost::dynamic_bitset<> Combination(StringLength);
+	MAPM Counter;
+	MAPM MaxCombination = pow(StringLength,2);
+	for ( Counter = 0; Counter < MaxCombination; Counter++ ) {
+		
+	}
 }
 
 #endif

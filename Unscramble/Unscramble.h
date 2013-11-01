@@ -20,6 +20,7 @@ class Unscramble {
 };
 
 Unscramble::Unscramble() {
+	m_apm_cpp_precision(256);
 	InitLetterFrequencyDictionary();
 	ReadDictionary();
 }
