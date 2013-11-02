@@ -2,7 +2,6 @@
 c:\git\unscramble\unscramble\utility.h(33): warning C4018: '<' : signed/unsigned mismatch
 c:\git\unscramble\unscramble\primenumber.h(16): warning C4018: '<' : signed/unsigned mismatch
 c:\git\unscramble\unscramble\stringcombination.h(12): warning C4018: '<' : signed/unsigned mismatch
-c:\git\unscramble\unscramble\unscramble.h(77): warning C4018: '<' : signed/unsigned mismatch
 c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(180): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
           c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(179) : while compiling class template member function 'bool std::less<_Ty>::operator ()(const _Ty &,const _Ty &) const'
           with

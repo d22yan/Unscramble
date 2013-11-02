@@ -62,7 +62,7 @@ void Unscramble::InitLetterFrequencyDictionary(){
 }
 
 void Unscramble::DisplayResult(map_mapm_liststring Result) {
-	for (map_mapm_liststring::const_iterator iterator = Result.begin(), end = Result.end(); iterator != end; ++iterator) {
+	for (map_mapm_liststring::iterator iterator = Result.begin(), end = Result.end(); iterator != end; ++iterator) {
 		std::list<std::string> WordList = iterator->second;
 		for (std::list<std::string>::iterator iterator = WordList.begin(), end = WordList.end(); iterator != end; ++iterator) {
 			std::cout << *iterator << std::endl;
@@ -74,8 +74,8 @@ MAPM Unscramble::WordtoPrime(std::string word) {
 	MAPM prime = 1;
 	std::string tolowercase = Utility::ToLowerCase(word);
 	std::vector<char> characters(tolowercase.begin(), tolowercase.end());
-	for(int i = 0; i < characters.size(); i++) {
-		prime *= LetterFrequencyDictionary.at(characters.at(i));
+	for(std::vector<char>::iterator iterator = characters.begin(), end = characters.end(); iterator != end; ++iterator) {
+		prime *= LetterFrequencyDictionary.at(*iterator);
 	}
 	return prime;
 }
@@ -83,8 +83,8 @@ MAPM Unscramble::WordtoPrime(std::string word) {
 void Unscramble::InsertPrimeWord(std::string word) {
 	bool valid = true;
 	int WordLength = word.length();
-	for(int i = 0; i < WordLength; i++) {
-		if (!isalpha(word[i])) {
+	for (std::string::iterator iterator = word.begin(), end = word.end(); iterator != end; ++iterator) {
+		if (!isalpha(*iterator)) {
 			valid = false;
 		}
 	}
@@ -107,7 +107,7 @@ void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	MAPM prime;
 	std::list<std::string> AllCombinationList = StringCombination::GenerateCombination(ScrambledWord);
 	map_mapm_liststring Result;
-	for (std::list<std::string>::const_iterator iterator = AllCombinationList.begin(), end = AllCombinationList.end(); iterator != end; ++iterator) {
+	for (std::list<std::string>::iterator iterator = AllCombinationList.begin(), end = AllCombinationList.end(); iterator != end; ++iterator) {
 		prime = WordtoPrime(*iterator);
 		if (Result.find(prime) == Result.end() && PrimeWordDictionary.find(prime) != PrimeWordDictionary.end()) {
 			std::list<std::string> MatchedPrimeList = PrimeWordDictionary.at(prime);
