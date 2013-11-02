@@ -3,12 +3,23 @@
 
 class StringCombination {
 	public:
-		static void ListCombination(std::string);
+		static std::string BinaryToString(boost::dynamic_bitset<>, std::vector<char>);
+		static std::list<std::string> GenerateCombination(std::string);
 };
 
-void StringCombination::ListCombination(std::string word) {
+std::string StringCombination::BinaryToString(boost::dynamic_bitset<> binary, std::vector<char> wordvector) {
+	std::string result = ""; // TODO refactor string initialization of empty string
+	for ( int i = 0; i < binary.size(); i++ ) {
+		if (binary[i] == 1) {
+			result.append(Utility::CharToString(wordvector.at(i)));
+		}
+	}
+	return result;
+}
+
+std::list<std::string> StringCombination::GenerateCombination(std::string word) {
 	int StringLength = word.length();
-	std::list<std::string> list;
+	std::list<std::string> CombinationList;
 	std::string SortedString= Utility::SortCharacters(word);
 	std::vector<char> WordVector;
 	for( int i = 0; i < StringLength; i++) {
@@ -16,10 +27,12 @@ void StringCombination::ListCombination(std::string word) {
 	}
 	boost::dynamic_bitset<> Combination(StringLength);
 	MAPM Counter;
-	MAPM MaxCombination = pow(StringLength,2);
-	for ( Counter = 0; Counter < MaxCombination; Counter++ ) {
-		
+	MAPM MaxCombination = pow(2,StringLength);
+	for ( Counter = 1; Counter < MaxCombination; Counter++ ) {
+		Utility::IncrementBit(Combination);
+		CombinationList.insert(CombinationList.begin(),BinaryToString(Combination,WordVector));
 	}
+	return CombinationList;
 }
 
 #endif
