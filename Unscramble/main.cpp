@@ -1,7 +1,4 @@
 //todo slow construction of the dictionary, possibly avoid the usage of iostream
-//todo const_iterator or iterator?
-//todo refactor iteration through vector, possibly usage of foreach loop
-//todo refactor string initialization of empty string // stringcombination.h - BinaryTostring
 
 #include <algorithm>
 #include <fstream> 

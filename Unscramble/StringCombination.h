@@ -8,7 +8,7 @@ class StringCombination {
 };
 
 std::string StringCombination::BinaryToString(boost::dynamic_bitset<> binary, std::vector<char> wordvector) {
-	std::string result = ""; 
+	std::string result; 
 	for ( int i = 0; i < binary.size(); i++ ) {
 		if (binary[i] == 1) {
 			result.append(Utility::CharToString(wordvector.at(i)));
