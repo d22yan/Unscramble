@@ -1,11 +1,5 @@
 #ifndef _UNSCRAMBLE_H
 #define _UNSCRAMBLE_H
-#define NUMBER_OF_LETTERS 26
-
-//todo slow construction of the dictionary, possibly avoid the usage of iostream
-//todo const_iterator or iterator?
-//todo refactor iteration through vector, possibly usage of foreach loop
-const std::string DictionaryFileName = "dictionary2.txt";
 
 class Unscramble {
 	private:
@@ -127,12 +121,10 @@ void Unscramble::ReadDictionary() {
 	std::ifstream myReadFile;
 	myReadFile.open(DictionaryFileName);
 	if (myReadFile.is_open()) {
-		int counter = 0;
 		char output[256];
 		while(!myReadFile.eof()) {
 			myReadFile >> output;
 			InsertPrimeWord(output);
-			std::cout << counter++ << " " << output << std::endl;
 		}
 	}
 }

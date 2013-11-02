@@ -34,9 +34,6 @@
     <ClInclude Include="StringCombination.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StringPermutation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Unscramble.h">
       <Filter>Header Files</Filter>
     </ClInclude>
