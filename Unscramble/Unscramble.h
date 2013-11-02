@@ -2,21 +2,24 @@
 #define _UNSCRAMBLE_H
 #define NUMBER_OF_LETTERS 26
 
+//todo slow construction of the dictionary, possibly avoid the usage of iostream
+//todo const_iterator or iterator?
 //todo refactor iteration through vector, possibly usage of foreach loop
 const std::string DictionaryFileName = "dictionary2.txt";
 
 class Unscramble {
 	private:
 		std::map<char, int> LetterFrequencyDictionary;
-		std::map<MAPM, std::list<std::string>> PrimeWordDictionary;
+		map_mapm_liststring PrimeWordDictionary;
 		void ReadDictionary();
 		std::vector<char> GetLetterFrequency();
 		void InitLetterFrequencyDictionary();
 	public:
 		Unscramble();
-		MAPM WordtoPrime(std::string);
+		void DisplayResult(map_mapm_liststring);
 		void InsertPrimeWord(std::string);
 		void UnscrambleString(std::string);
+		MAPM WordtoPrime(std::string);
 };
 
 Unscramble::Unscramble() {
@@ -64,6 +67,15 @@ void Unscramble::InitLetterFrequencyDictionary(){
 	}
 }
 
+void Unscramble::DisplayResult(map_mapm_liststring Result) {
+	for (map_mapm_liststring::const_iterator iterator = Result.begin(), end = Result.end(); iterator != end; ++iterator) {
+		std::list<std::string> WordList = iterator->second;
+		for (std::list<std::string>::iterator iterator = WordList.begin(), end = WordList.end(); iterator != end; ++iterator) {
+			std::cout << *iterator << std::endl;
+		}
+	}
+}
+
 MAPM Unscramble::WordtoPrime(std::string word) {
 	MAPM prime = 1;
 	std::string tolowercase = Utility::ToLowerCase(word);
@@ -88,7 +100,7 @@ void Unscramble::InsertPrimeWord(std::string word) {
 		if (PrimeWordDictionary.find(prime) == PrimeWordDictionary.end()) {
 			std::list<std::string> NewList;
 			NewList.insert(NewList.begin(),tolowercase);
-			PrimeWordDictionary.insert(std::pair<MAPM,std::list<std::string>>(WordtoPrime(tolowercase),NewList));
+			PrimeWordDictionary.insert(pair_mapm_liststring(WordtoPrime(tolowercase),NewList));
 		}
 		else {
 			PrimeWordDictionary.at(prime).insert(PrimeWordDictionary.at(prime).begin(),tolowercase);
@@ -98,23 +110,29 @@ void Unscramble::InsertPrimeWord(std::string word) {
 
 void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	if(ScrambledWord.empty()) { return; }
-	MAPM prime = WordtoPrime(ScrambledWord);
-	if (PrimeWordDictionary.find(prime) != PrimeWordDictionary.end()) {
-		std::list<std::string> MatchedPrimeList = PrimeWordDictionary.at(prime);
-		for (std::list<std::string>::const_iterator iterator = MatchedPrimeList.begin(), end = MatchedPrimeList.end(); iterator != end; ++iterator) {
-			std::cout << *iterator << std::endl;
+	MAPM prime;
+	std::list<std::string> AllCombinationList = StringCombination::GenerateCombination(ScrambledWord);
+	map_mapm_liststring Result;
+	for (std::list<std::string>::const_iterator iterator = AllCombinationList.begin(), end = AllCombinationList.end(); iterator != end; ++iterator) {
+		prime = WordtoPrime(*iterator);
+		if (Result.find(prime) == Result.end() && PrimeWordDictionary.find(prime) != PrimeWordDictionary.end()) {
+			std::list<std::string> MatchedPrimeList = PrimeWordDictionary.at(prime);
+			Result.insert(pair_mapm_liststring(prime,MatchedPrimeList));
 		}
 	}
+	DisplayResult(Result);
 }
 
 void Unscramble::ReadDictionary() {
 	std::ifstream myReadFile;
 	myReadFile.open(DictionaryFileName);
 	if (myReadFile.is_open()) {
+		int counter = 0;
 		char output[256];
 		while(!myReadFile.eof()) {
 			myReadFile >> output;
 			InsertPrimeWord(output);
+			std::cout << counter++ << " " << output << std::endl;
 		}
 	}
 }
