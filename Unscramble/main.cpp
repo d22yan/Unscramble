@@ -1,3 +1,8 @@
+//todo slow construction of the dictionary, possibly avoid the usage of iostream
+//todo const_iterator or iterator?
+//todo refactor iteration through vector, possibly usage of foreach loop
+//todo refactor string initialization of empty string // stringcombination.h - BinaryTostring
+
 #include <algorithm>
 #include <fstream> 
 #include <iostream>
@@ -8,18 +13,17 @@
 #include <string>
 #include <vector>
 
-// todo remove string permutation
-// http://www.tc.umn.edu/~ringx004/mapm-main.html
-#include <M_APM.H>
 #include <boost\dynamic_bitset\dynamic_bitset.hpp>
+#include <M_APM.H> // http://www.tc.umn.edu/~ringx004/mapm-main.html
 
+#define NUMBER_OF_LETTERS 26
+const std::string DictionaryFileName = "dictionary2.txt";
 typedef std::map<MAPM,std::list<std::string>> map_mapm_liststring;
 typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 
 #include "Utility.h"
 #include "PrimeNumber.h"
 #include "StringCombination.h"
-#include "StringPermutation.h"
 #include "Unscramble.h"
 
 void main(int argc, char** argv) {
