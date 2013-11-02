@@ -100,8 +100,8 @@ void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	if(ScrambledWord.empty()) { return; }
 	MAPM prime = WordtoPrime(ScrambledWord);
 	if (PrimeWordDictionary.find(prime) != PrimeWordDictionary.end()) {
-		std::list<std::string> asd = PrimeWordDictionary.at(prime);
-		for (std::list<std::string>::const_iterator iterator = asd.begin(), end = asd.end(); iterator != end; ++iterator) {
+		std::list<std::string> MatchedPrimeList = PrimeWordDictionary.at(prime);
+		for (std::list<std::string>::const_iterator iterator = MatchedPrimeList.begin(), end = MatchedPrimeList.end(); iterator != end; ++iterator) {
 			std::cout << *iterator << std::endl;
 		}
 	}

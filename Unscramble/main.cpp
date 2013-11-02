@@ -3,6 +3,7 @@
 #include <iostream>
 #include <list>
 #include <map>
+#include <sstream>
 #include <stdlib.h>
 #include <string>
 #include <vector>
@@ -20,6 +21,9 @@
 void main(int argc, char** argv) {
 	Unscramble test = Unscramble();
 	test.UnscrambleString("seNSitizinghprey");
-	StringCombination::ListCombination("asd");
+	std::list<std::string> CombinationList = StringCombination::GenerateCombination("ewqasd");
+	for (std::list<std::string>::const_iterator iterator = CombinationList.begin(), end = CombinationList.end(); iterator != end; ++iterator) {
+		std::cout << *iterator << std::endl;
+	}
 	std::cin.ignore();
 }
