@@ -127,6 +127,7 @@ void Unscramble::ReadDictionary() {
 			InsertPrimeWord(output);
 		}
 	}
+	myReadFile.close();
 }
 
 
