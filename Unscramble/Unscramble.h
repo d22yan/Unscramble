@@ -3,10 +3,8 @@
 
 class Unscramble {
 	private:
-		std::map<char, int> CommonAlphabetDictionary;
 		map_mapm_liststring PrimeWordDictionary;
 		void ReadDictionary();
-		void InitCommonAlphabetDictionary();
 	public:
 		Unscramble();
 		void DisplayResult(map_mapm_liststring);
@@ -17,15 +15,7 @@ class Unscramble {
 
 Unscramble::Unscramble() {
 	m_apm_cpp_precision(256);
-	InitCommonAlphabetDictionary();
 	ReadDictionary();
-}
-
-void Unscramble::InitCommonAlphabetDictionary() {
-	std::map<char, int> NewAlphabetDictionary = CommonAlphabet::GeneratePrimeToLetterDictionary();
-	for ( std::map<char,int>::iterator iterator = NewAlphabetDictionary.begin(), end = NewAlphabetDictionary.end(); iterator != end; ++iterator) {
-		CommonAlphabetDictionary.insert(std::pair<char,int>(iterator->first, iterator->second));
-	}
 }
 
 void Unscramble::DisplayResult(map_mapm_liststring Result) {
@@ -38,11 +28,12 @@ void Unscramble::DisplayResult(map_mapm_liststring Result) {
 }
 
 MAPM Unscramble::WordtoPrime(std::string word) {
+	CommonAlphabet *CommonAlphabetInstance = CommonAlphabet::GetInstance();
 	MAPM prime = 1;
 	std::string tolowercase = Utility::ToLowerCase(word);
 	std::vector<char> characters(tolowercase.begin(), tolowercase.end());
 	for(std::vector<char>::iterator iterator = characters.begin(), end = characters.end(); iterator != end; ++iterator) {
-		prime *= CommonAlphabetDictionary.at(*iterator);
+		prime *= CommonAlphabetInstance->CommonAlphabetDictionary.at(*iterator);
 	}
 	return prime;
 }
