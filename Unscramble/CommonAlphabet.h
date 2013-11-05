@@ -4,11 +4,11 @@
 class CommonAlphabet {
 	private:
 		CommonAlphabet() {};
+		~CommonAlphabet();
 		static bool instanceFlag;
-		static CommonAlphabet *single;
+		static CommonAlphabet* single;
 		static void GeneratePrimeCommonAlphabetDictionary();
 	public:
-		~CommonAlphabet() {	instanceFlag = false; };
 		std::map<char, int> PrimeCommonAlphabetDictionary;
 		static CommonAlphabet *GetInstance();
 		static std::vector<char> GerenateCommonAlphabet();
@@ -16,6 +16,11 @@ class CommonAlphabet {
 
 bool CommonAlphabet::instanceFlag = false;
 CommonAlphabet* CommonAlphabet::single = NULL;
+
+CommonAlphabet::~CommonAlphabet() {
+	delete single;
+	instanceFlag = false;
+}
 
 CommonAlphabet* CommonAlphabet::GetInstance() {
     if(!instanceFlag) {

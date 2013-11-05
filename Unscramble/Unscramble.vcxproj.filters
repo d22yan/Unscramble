@@ -43,5 +43,8 @@
     <ClInclude Include="CommonAlphabet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PrimeToWord.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

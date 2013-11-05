@@ -20,6 +20,7 @@
   <ItemGroup>
     <ClInclude Include="CommonAlphabet.h" />
     <ClInclude Include="PrimeNumber.h" />
+    <ClInclude Include="PrimeToWord.h" />
     <ClInclude Include="StringCombination.h" />
     <ClInclude Include="Unscramble.h" />
     <ClInclude Include="Utility.h" />
