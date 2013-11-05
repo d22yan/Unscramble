@@ -6,10 +6,10 @@ class CommonAlphabet {
 		CommonAlphabet() {};
 		static bool instanceFlag;
 		static CommonAlphabet *single;
-		static void GeneratePrimeToLetterDictionary();
+		static void GeneratePrimeCommonAlphabetDictionary();
 	public:
 		~CommonAlphabet() {	instanceFlag = false; };
-		std::map<char, int> CommonAlphabetDictionary;
+		std::map<char, int> PrimeCommonAlphabetDictionary;
 		static CommonAlphabet *GetInstance();
 		static std::vector<char> GerenateCommonAlphabet();
 };
@@ -21,18 +21,18 @@ CommonAlphabet* CommonAlphabet::GetInstance() {
     if(!instanceFlag) {
         single = new CommonAlphabet();
         instanceFlag = true;
-		GeneratePrimeToLetterDictionary();
+		GeneratePrimeCommonAlphabetDictionary();
         return single;
     }
     return single;
 }
 
-void CommonAlphabet::GeneratePrimeToLetterDictionary() {
+void CommonAlphabet::GeneratePrimeCommonAlphabetDictionary() {
 	CommonAlphabet *CommonAlphabetInstance = CommonAlphabet::GetInstance();
 	std::vector<int> PrimeNumbersVector = PrimeNumber::GeneratePrimes(NUMBER_OF_LETTERS);
 	std::vector<char> CommonAlphabetVector = GerenateCommonAlphabet();
 	for (int i = 0; i < NUMBER_OF_LETTERS; i++) {
-		CommonAlphabetInstance->CommonAlphabetDictionary.insert(std::pair<char,int>(CommonAlphabetVector.at(i),PrimeNumbersVector.at(i)));
+		CommonAlphabetInstance->PrimeCommonAlphabetDictionary.insert(std::pair<char,int>(CommonAlphabetVector.at(i),PrimeNumbersVector.at(i)));
 	}
 }
 
