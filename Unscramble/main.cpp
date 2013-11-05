@@ -20,6 +20,7 @@ typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 
 #include "Utility.h"
 #include "PrimeNumber.h"
+#include "CommonAlphabet.h"
 #include "StringCombination.h"
 #include "Unscramble.h"
 

@@ -3,11 +3,10 @@
 
 class Unscramble {
 	private:
-		std::map<char, int> LetterFrequencyDictionary;
+		std::map<char, int> CommonAlphabetDictionary;
 		map_mapm_liststring PrimeWordDictionary;
 		void ReadDictionary();
-		std::vector<char> GetLetterFrequency();
-		void InitLetterFrequencyDictionary();
+		void InitCommonAlphabetDictionary();
 	public:
 		Unscramble();
 		void DisplayResult(map_mapm_liststring);
@@ -18,46 +17,14 @@ class Unscramble {
 
 Unscramble::Unscramble() {
 	m_apm_cpp_precision(256);
-	InitLetterFrequencyDictionary();
+	InitCommonAlphabetDictionary();
 	ReadDictionary();
 }
 
-std::vector<char> Unscramble::GetLetterFrequency() {
-	std::vector<char> myvector;
-	myvector.push_back('e');
-	myvector.push_back('t');
-	myvector.push_back('a');
-	myvector.push_back('o');
-	myvector.push_back('i');
-	myvector.push_back('n');
-	myvector.push_back('s');
-	myvector.push_back('h');
-	myvector.push_back('r');
-	myvector.push_back('d');
-	myvector.push_back('l');
-	myvector.push_back('c');
-	myvector.push_back('u');
-	myvector.push_back('m');
-	myvector.push_back('w');
-	myvector.push_back('f');
-	myvector.push_back('g');
-	myvector.push_back('y');
-	myvector.push_back('p');
-	myvector.push_back('b');
-	myvector.push_back('v');
-	myvector.push_back('k');
-	myvector.push_back('j');
-	myvector.push_back('x');
-	myvector.push_back('q');
-	myvector.push_back('z');
-	return myvector;
-}
-
-void Unscramble::InitLetterFrequencyDictionary(){
-	std::vector<int> primenumbers = PrimeNumber::GeneratePrimes(NUMBER_OF_LETTERS);
-	std::vector<char> letterfrequency = GetLetterFrequency();
-	for (int i = 0; i < NUMBER_OF_LETTERS; i++) {
-		LetterFrequencyDictionary.insert(std::pair<char,int>(letterfrequency.at(i),primenumbers.at(i)));
+void Unscramble::InitCommonAlphabetDictionary() {
+	std::map<char, int> NewAlphabetDictionary = CommonAlphabet::GeneratePrimeToLetterDictionary();
+	for ( std::map<char,int>::iterator iterator = NewAlphabetDictionary.begin(), end = NewAlphabetDictionary.end(); iterator != end; ++iterator) {
+		CommonAlphabetDictionary.insert(std::pair<char,int>(iterator->first, iterator->second));
 	}
 }
 
@@ -75,7 +42,7 @@ MAPM Unscramble::WordtoPrime(std::string word) {
 	std::string tolowercase = Utility::ToLowerCase(word);
 	std::vector<char> characters(tolowercase.begin(), tolowercase.end());
 	for(std::vector<char>::iterator iterator = characters.begin(), end = characters.end(); iterator != end; ++iterator) {
-		prime *= LetterFrequencyDictionary.at(*iterator);
+		prime *= CommonAlphabetDictionary.at(*iterator);
 	}
 	return prime;
 }
