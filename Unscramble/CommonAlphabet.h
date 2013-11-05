@@ -2,22 +2,41 @@
 #define _COMMON_ALPHABET_H
 
 class CommonAlphabet {
+	private:
+		CommonAlphabet() {};
+		static bool instanceFlag;
+		static CommonAlphabet *single;
+		static void GeneratePrimeToLetterDictionary();
 	public:
-		static std::vector<char> GenerateLetterFrequency();
-		static std::map<char, int> GeneratePrimeToLetterDictionary();
+		~CommonAlphabet() {	instanceFlag = false; };
+		std::map<char, int> CommonAlphabetDictionary;
+		static CommonAlphabet *GetInstance();
+		static std::vector<char> GerenateCommonAlphabet();
 };
 
-std::map<char, int> CommonAlphabet::GeneratePrimeToLetterDictionary() {
-	std::map<char, int> PrimeToLetterDictionary;
-	std::vector<int> primenumbers = PrimeNumber::GeneratePrimes(NUMBER_OF_LETTERS);
-	std::vector<char> letterfrequency = GenerateLetterFrequency();
-	for (int i = 0; i < NUMBER_OF_LETTERS; i++) {
-		PrimeToLetterDictionary.insert(std::pair<char,int>(letterfrequency.at(i),primenumbers.at(i)));
-	}
-	return PrimeToLetterDictionary;
+bool CommonAlphabet::instanceFlag = false;
+CommonAlphabet* CommonAlphabet::single = NULL;
+
+CommonAlphabet* CommonAlphabet::GetInstance() {
+    if(!instanceFlag) {
+        single = new CommonAlphabet();
+        instanceFlag = true;
+		GeneratePrimeToLetterDictionary();
+        return single;
+    }
+    return single;
 }
 
-std::vector<char> CommonAlphabet::GenerateLetterFrequency() {
+void CommonAlphabet::GeneratePrimeToLetterDictionary() {
+	CommonAlphabet *CommonAlphabetInstance = CommonAlphabet::GetInstance();
+	std::vector<int> PrimeNumbersVector = PrimeNumber::GeneratePrimes(NUMBER_OF_LETTERS);
+	std::vector<char> CommonAlphabetVector = GerenateCommonAlphabet();
+	for (int i = 0; i < NUMBER_OF_LETTERS; i++) {
+		CommonAlphabetInstance->CommonAlphabetDictionary.insert(std::pair<char,int>(CommonAlphabetVector.at(i),PrimeNumbersVector.at(i)));
+	}
+}
+
+std::vector<char> CommonAlphabet::GerenateCommonAlphabet() {
 	std::vector<char> myvector;
 	myvector.push_back('e');
 	myvector.push_back('t');

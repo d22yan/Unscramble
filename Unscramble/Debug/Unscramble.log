@@ -28,7 +28,7 @@ c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(180): war
           [
               _Traits=std::_Tmap_traits<MAPM,std::list<std::string>,std::less<MAPM>,std::allocator<std::pair<const MAPM,std::list<std::string>>>,false>
           ]
-          c:\git\unscramble\unscramble\unscramble.h(7) : see reference to class template instantiation 'std::map<_Kty,_Ty>' being compiled
+          c:\git\unscramble\unscramble\unscramble.h(6) : see reference to class template instantiation 'std::map<_Kty,_Ty>' being compiled
           with
           [
               _Kty=MAPM,
