@@ -18,6 +18,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommonAlphabet.h" />
     <ClInclude Include="PrimeNumber.h" />
     <ClInclude Include="StringCombination.h" />
     <ClInclude Include="Unscramble.h" />
