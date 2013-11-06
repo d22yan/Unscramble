@@ -8,9 +8,7 @@ class Unscramble {
 	public:
 		Unscramble();
 		void DisplayResult(map_mapm_liststring);
-		void InsertPrimeWord(std::string);
 		void UnscrambleString(std::string);
-		MAPM WordToPrime(std::string);
 };
 
 Unscramble::Unscramble() {
@@ -28,46 +26,13 @@ void Unscramble::DisplayResult(map_mapm_liststring Result) {
 	}
 }
 
-MAPM Unscramble::WordToPrime(std::string word) {
-	CommonAlphabet *CommonAlphabetInstance = CommonAlphabet::GetInstance();
-	MAPM prime = 1;
-	std::string tolowercase = Utility::ToLowerCase(word);
-	std::vector<char> characters(tolowercase.begin(), tolowercase.end());
-	for(std::vector<char>::iterator iterator = characters.begin(), end = characters.end(); iterator != end; ++iterator) {
-		prime *= CommonAlphabetInstance->PrimeCommonAlphabetDictionary.at(*iterator);
-	}
-	return prime;
-}
-
-void Unscramble::InsertPrimeWord(std::string word) {
-	bool valid = true;
-	int WordLength = word.length();
-	for (std::string::iterator iterator = word.begin(), end = word.end(); iterator != end; ++iterator) {
-		if (!isalpha(*iterator)) {
-			valid = false;
-		}
-	}
-	if (valid) {
-		std::string tolowercase = Utility::ToLowerCase(word);
-		MAPM prime = WordToPrime(tolowercase);
-		if (PrimeToWordInstance->PrimeWordDictionary.find(prime) == PrimeToWordInstance->PrimeWordDictionary.end()) {
-			std::list<std::string> NewList;
-			NewList.insert(NewList.begin(),tolowercase);
-			PrimeToWordInstance->PrimeWordDictionary.insert(pair_mapm_liststring(WordToPrime(tolowercase),NewList));
-		}
-		else {
-			PrimeToWordInstance->PrimeWordDictionary.at(prime).insert(PrimeToWordInstance->PrimeWordDictionary.at(prime).begin(),tolowercase);
-		}
-	}
-}
-
 void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	if(ScrambledWord.empty()) { return; }
 	MAPM prime;
 	std::list<std::string> AllCombinationList = StringCombination::GenerateCombination(ScrambledWord);
 	map_mapm_liststring Result;
 	for (std::list<std::string>::iterator iterator = AllCombinationList.begin(), end = AllCombinationList.end(); iterator != end; ++iterator) {
-		prime = WordToPrime(*iterator);
+		prime = PrimeToWord::WordToPrime(*iterator);
 		if (Result.find(prime) == Result.end() && PrimeToWordInstance->PrimeWordDictionary.find(prime) != PrimeToWordInstance->PrimeWordDictionary.end()) {
 			std::list<std::string> MatchedPrimeList = PrimeToWordInstance->PrimeWordDictionary.at(prime);
 			Result.insert(pair_mapm_liststring(prime,MatchedPrimeList));
@@ -83,7 +48,7 @@ void Unscramble::ReadDictionary() {
 		char output[256];
 		while(!myReadFile.eof()) {
 			myReadFile >> output;
-			InsertPrimeWord(output);
+			PrimeToWordInstance->InsertPrimeWord(output);
 		}
 	}
 	myReadFile.close();
