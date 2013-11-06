@@ -9,7 +9,7 @@ class PrimeToWord {
 		static PrimeToWord* single;
 	public:
 		map_mapm_liststring PrimeWordDictionary;
-		PrimeToWord* GetInstance();
+		static PrimeToWord* GetInstance();
 };
 
 bool PrimeToWord::instanceFlag = false;
