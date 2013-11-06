@@ -3,7 +3,7 @@
 
 class Unscramble {
 	private:
-		map_mapm_liststring PrimeWordDictionary;
+		PrimeToWord* PrimeToWordInstance;
 		void ReadDictionary();
 	public:
 		Unscramble();
@@ -15,6 +15,7 @@ class Unscramble {
 
 Unscramble::Unscramble() {
 	m_apm_cpp_precision(256);
+	PrimeToWordInstance = PrimeToWord::GetInstance();
 	ReadDictionary();
 }
 
@@ -49,13 +50,13 @@ void Unscramble::InsertPrimeWord(std::string word) {
 	if (valid) {
 		std::string tolowercase = Utility::ToLowerCase(word);
 		MAPM prime = WordToPrime(tolowercase);
-		if (PrimeWordDictionary.find(prime) == PrimeWordDictionary.end()) {
+		if (PrimeToWordInstance->PrimeWordDictionary.find(prime) == PrimeToWordInstance->PrimeWordDictionary.end()) {
 			std::list<std::string> NewList;
 			NewList.insert(NewList.begin(),tolowercase);
-			PrimeWordDictionary.insert(pair_mapm_liststring(WordToPrime(tolowercase),NewList));
+			PrimeToWordInstance->PrimeWordDictionary.insert(pair_mapm_liststring(WordToPrime(tolowercase),NewList));
 		}
 		else {
-			PrimeWordDictionary.at(prime).insert(PrimeWordDictionary.at(prime).begin(),tolowercase);
+			PrimeToWordInstance->PrimeWordDictionary.at(prime).insert(PrimeToWordInstance->PrimeWordDictionary.at(prime).begin(),tolowercase);
 		}
 	}
 }
@@ -67,8 +68,8 @@ void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	map_mapm_liststring Result;
 	for (std::list<std::string>::iterator iterator = AllCombinationList.begin(), end = AllCombinationList.end(); iterator != end; ++iterator) {
 		prime = WordToPrime(*iterator);
-		if (Result.find(prime) == Result.end() && PrimeWordDictionary.find(prime) != PrimeWordDictionary.end()) {
-			std::list<std::string> MatchedPrimeList = PrimeWordDictionary.at(prime);
+		if (Result.find(prime) == Result.end() && PrimeToWordInstance->PrimeWordDictionary.find(prime) != PrimeToWordInstance->PrimeWordDictionary.end()) {
+			std::list<std::string> MatchedPrimeList = PrimeToWordInstance->PrimeWordDictionary.at(prime);
 			Result.insert(pair_mapm_liststring(prime,MatchedPrimeList));
 		}
 	}
