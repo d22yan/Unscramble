@@ -8,9 +8,10 @@ class PrimeToWord {
 		static bool instanceFlag;
 		static PrimeToWord* single;
 	public:
-		map_mapm_liststring PrimeWordDictionary;
+		map_mapm_liststring PrimeDictionary;
 		static PrimeToWord* GetInstance();
-		void InsertPrimeWord(std::string);
+		void InsertWord(std::string);
+		void InsertPrime(MAPM,std::string);
 		static MAPM WordToPrime(std::string);
 };
 
@@ -42,7 +43,7 @@ MAPM PrimeToWord::WordToPrime(std::string word) {
 	return prime;
 }
 
-void PrimeToWord::InsertPrimeWord(std::string word) {
+void PrimeToWord::InsertWord(std::string word) {
 	bool valid = true;
 	int WordLength = word.length();
 	for (std::string::iterator iterator = word.begin(), end = word.end(); iterator != end; ++iterator) {
@@ -51,16 +52,20 @@ void PrimeToWord::InsertPrimeWord(std::string word) {
 		}
 	}
 	if (valid) {
-		std::string tolowercase = Utility::ToLowerCase(word);
-		MAPM prime = WordToPrime(tolowercase);
-		if (PrimeWordDictionary.find(prime) == PrimeWordDictionary.end()) {
-			std::list<std::string> NewList;
-			NewList.insert(NewList.begin(),tolowercase);
-			PrimeWordDictionary.insert(pair_mapm_liststring(WordToPrime(tolowercase),NewList));
-		}
-		else {
-			PrimeWordDictionary.at(prime).insert(PrimeWordDictionary.at(prime).begin(),tolowercase);
-		}
+		std::string LowerCased = Utility::ToLowerCase(word);
+		MAPM PrimeNumber= WordToPrime(LowerCased);
+		InsertPrime(PrimeNumber, LowerCased);
+	}
+}
+
+void PrimeToWord::InsertPrime(MAPM PrimeNumber, std::string word) {
+	if (PrimeDictionary.find(PrimeNumber) == PrimeDictionary.end()) {
+		std::list<std::string> NewList;
+		NewList.insert(NewList.begin(),word);
+		PrimeDictionary.insert(pair_mapm_liststring(WordToPrime(word),NewList));
+	}
+	else {
+		PrimeDictionary.at(PrimeNumber).insert(PrimeDictionary.at(PrimeNumber).begin(),word);
 	}
 }
 
