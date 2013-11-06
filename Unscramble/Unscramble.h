@@ -33,8 +33,8 @@ void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	map_mapm_liststring Result;
 	for (std::list<std::string>::iterator iterator = AllCombinationList.begin(), end = AllCombinationList.end(); iterator != end; ++iterator) {
 		prime = PrimeToWord::WordToPrime(*iterator);
-		if (Result.find(prime) == Result.end() && PrimeToWordInstance->PrimeWordDictionary.find(prime) != PrimeToWordInstance->PrimeWordDictionary.end()) {
-			std::list<std::string> MatchedPrimeList = PrimeToWordInstance->PrimeWordDictionary.at(prime);
+		if (Result.find(prime) == Result.end() && PrimeToWordInstance->PrimeDictionary.find(prime) != PrimeToWordInstance->PrimeDictionary.end()) {
+			std::list<std::string> MatchedPrimeList = PrimeToWordInstance->PrimeDictionary.at(prime);
 			Result.insert(pair_mapm_liststring(prime,MatchedPrimeList));
 		}
 	}
@@ -48,7 +48,7 @@ void Unscramble::ReadDictionary() {
 		char output[256];
 		while(!myReadFile.eof()) {
 			myReadFile >> output;
-			PrimeToWordInstance->InsertPrimeWord(output);
+			PrimeToWordInstance->InsertWord(output);
 		}
 	}
 	myReadFile.close();
