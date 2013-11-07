@@ -32,6 +32,6 @@ typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 
 void main(int argc, char** argv) {
 	Unscramble test = Unscramble();
-	test.UnscrambleString("venommanners");
+	test.UnscrambleString("Acalyptratae");
 	std::cin.ignore();
 }
