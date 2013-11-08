@@ -34,13 +34,13 @@ PrimeToWord* PrimeToWord::GetInstance() {
 
 MAPM PrimeToWord::WordToPrime(std::string word) {
 	CommonAlphabet *CommonAlphabetInstance = CommonAlphabet::GetInstance();
-	MAPM prime = 1;
+	MAPM Prime = 1;
 	std::string tolowercase = Utility::ToLowerCase(word);
 	std::vector<char> characters(tolowercase.begin(), tolowercase.end());
 	for(std::vector<char>::iterator iterator = characters.begin(), end = characters.end(); iterator != end; ++iterator) {
-		prime *= CommonAlphabetInstance->PrimeCommonAlphabetDictionary.at(*iterator);
+		Prime *= CommonAlphabetInstance->PrimeCommonAlphabetDictionary.at(*iterator);
 	}
-	return prime;
+	return Prime;
 }
 
 void PrimeToWord::InsertWord(std::string word) {

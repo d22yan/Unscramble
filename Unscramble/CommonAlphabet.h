@@ -34,9 +34,9 @@ CommonAlphabet* CommonAlphabet::GetInstance() {
 
 void CommonAlphabet::GeneratePrimeCommonAlphabetDictionary() {
 	CommonAlphabet *CommonAlphabetInstance = CommonAlphabet::GetInstance();
-	std::vector<int> PrimeNumbersVector = PrimeNumber::GeneratePrimes(NUMBER_OF_LETTERS);
+	std::vector<int> PrimeNumbersVector = PrimeNumber::GeneratePrimes(ALPHABET_COUNT);
 	std::vector<char> CommonAlphabetVector = GerenateCommonAlphabet();
-	for (int i = 0; i < NUMBER_OF_LETTERS; i++) {
+	for (int i = 0; i < ALPHABET_COUNT; i++) {
 		CommonAlphabetInstance->PrimeCommonAlphabetDictionary.insert(std::pair<char,int>(CommonAlphabetVector.at(i),PrimeNumbersVector.at(i)));
 	}
 }

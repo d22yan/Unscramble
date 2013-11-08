@@ -12,9 +12,10 @@ class Unscramble {
 };
 
 Unscramble::Unscramble() {
-	m_apm_cpp_precision(256);
+	m_apm_cpp_precision(MAXIMUM_DIGIT);
 	PrimeToWordInstance = PrimeToWord::GetInstance();
-	ReadDictionary();
+	//ReadDictionary();
+	PrimeWordList::ConvertToPrimeDictionary("dictionary2.txt");
 }
 
 void Unscramble::DisplayResult(map_mapm_liststring Result) {
@@ -45,7 +46,7 @@ void Unscramble::ReadDictionary() {
 	std::ifstream myReadFile;
 	myReadFile.open(DictionaryFileName);
 	if (myReadFile.is_open()) {
-		char output[256];
+		std::string output;
 		while(!myReadFile.eof()) {
 			myReadFile >> output;
 			PrimeToWordInstance->InsertWord(output);
