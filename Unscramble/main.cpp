@@ -31,7 +31,7 @@ typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 
 #include "Utility.h"
 #include "PrimeNumber.h"
-#include "CommonAlphabet.h"
+#include "LetterFrequency.h"
 #include "StringCombination.h"
 #include "PrimedDictionary.h"
 #include "Unscramble.h"

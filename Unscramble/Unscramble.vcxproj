@@ -13,12 +13,13 @@
   <ItemGroup>
     <Text Include="dictionary1.txt" />
     <Text Include="dictionary2.txt" />
+    <Text Include="LetterFrequency.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CommonAlphabet.h" />
+    <ClInclude Include="LetterFrequency.h" />
     <ClInclude Include="PrimeNumber.h" />
     <ClInclude Include="PrimedDictionary.h" />
     <ClInclude Include="StringCombination.h" />
