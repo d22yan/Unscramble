@@ -3,8 +3,7 @@
 
 class Unscramble {
 	private:
-		PrimeToWord* PrimeToWordInstance;
-		void ReadDictionary();
+		PrimedDictionary* PrimeToWordInstance;
 	public:
 		Unscramble();
 		void UnscrambleString(std::string);
@@ -12,10 +11,8 @@ class Unscramble {
 
 Unscramble::Unscramble() {
 	m_apm_cpp_precision(MAXIMUM_DIGIT);
-	PrimeToWordInstance = PrimeToWord::GetInstance();
-	//ReadDictionary();
-	//PrimeWordList::PrimedDictionaryConverter("dictionary2.txt");
-	PrimeWordList::ReadPrimedDictionary();
+	PrimeToWordInstance = PrimedDictionary::GetInstance();
+	PrimedDictionary::ReadPrimedDictionary();
 }
 
 void Unscramble::UnscrambleString(std::string ScrambledWord) {
@@ -24,7 +21,7 @@ void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	std::list<std::string> AllCombinationList = StringCombination::GenerateCombination(ScrambledWord);
 	map_mapm_liststring Result;
 	for (std::list<std::string>::iterator iterator = AllCombinationList.begin(), end = AllCombinationList.end(); iterator != end; ++iterator) {
-		Prime = PrimeToWord::WordToPrime(*iterator);
+		Prime = PrimedDictionary::WordToPrime(*iterator);
 		char PrimeString[MAXIMUM_DIGIT];
 		Prime.toIntegerString(PrimeString);
 		if (Result.find(Prime) == Result.end() && PrimeToWordInstance->PrimeDictionary.find(Prime) != PrimeToWordInstance->PrimeDictionary.end()) {
@@ -34,20 +31,5 @@ void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	}
 	Utility::DisplayDictionary(Result);
 }
-
-void Unscramble::ReadDictionary() {
-	std::ifstream myReadFile;
-	myReadFile.open(PrimedDictionaryFileName);
-	if (myReadFile.is_open()) {
-		std::string output;
-		while(!myReadFile.eof()) {
-			myReadFile >> output;
-			PrimeToWordInstance->InsertWord(output);
-		}
-	}
-	myReadFile.close();
-}
-
-
 
 #endif 
