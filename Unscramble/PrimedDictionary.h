@@ -5,19 +5,14 @@ class PrimedDictionary {
 	private:
 		PrimedDictionary() {};
 		~PrimedDictionary();
-
 		static bool instanceFlag;
 		static PrimedDictionary* single;
-
 	public:
 		map_mapm_liststring PrimeDictionary;
-
 		static PrimedDictionary* GetInstance();
-
-		static std::string PrimedDictionaryConverter(std::string);
+		static std::string ConvertToPrimedDictionary(std::string);
 		static void ReadDictionary();
 		static void ReadPrimedDictionary();
-
 		void InsertWord(std::string);
 		void InsertPrimeAndWord(MAPM,std::string);
 		static MAPM WordToPrime(std::string);
@@ -40,7 +35,7 @@ PrimedDictionary* PrimedDictionary::GetInstance() {
 	return single;
 }
 
-std::string PrimedDictionary::PrimedDictionaryConverter(std::string input) {
+std::string PrimedDictionary::ConvertToPrimedDictionary(std::string input) {
 	std::string	DictioanryFileName = input;
 	std::string NewDictionaryFileName = PrimedDictionarySuffix + input;
 	std::ifstream IStreamFile(input);
