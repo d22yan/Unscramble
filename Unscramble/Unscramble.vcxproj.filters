@@ -21,6 +21,9 @@
     <Text Include="dictionary2.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="LetterFrequency.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -40,10 +43,10 @@
     <ClInclude Include="Utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CommonAlphabet.h">
+    <ClInclude Include="PrimedDictionary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PrimedDictionary.h">
+    <ClInclude Include="LetterFrequency.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -66,6 +66,7 @@ void PrimedDictionary::ReadDictionary() {
 		std::string output;
 		while(!IStreamFile.eof()) {
 			IStreamFile >> output;
+			std::cout << output << std::endl;
 			single->InsertWord(output);
 		}
 	}
@@ -96,12 +97,12 @@ void PrimedDictionary::ReadPrimedDictionary() {
 }
 
 MAPM PrimedDictionary::WordToPrime(std::string word) {
-	CommonAlphabet *CommonAlphabetInstance = CommonAlphabet::GetInstance();
+	LetterFrequency *LetterFrequencyInstance = LetterFrequency::GetInstance();
 	MAPM Prime = 1;
 	std::string tolowercase = Utility::ToLowerCase(word);
 	std::vector<char> characters(tolowercase.begin(), tolowercase.end());
 	for(std::vector<char>::iterator iterator = characters.begin(), end = characters.end(); iterator != end; ++iterator) {
-		Prime *= CommonAlphabetInstance->PrimeCommonAlphabetDictionary.at(*iterator);
+		Prime *= LetterFrequencyInstance->LetterPrimeDictionary.at(*iterator);
 	}
 	return Prime;
 }
