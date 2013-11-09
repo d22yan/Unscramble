@@ -1,5 +1,5 @@
 ﻿  main.cpp
-c:\git\unscramble\unscramble\utility.h(33): warning C4018: '<' : signed/unsigned mismatch
+c:\git\unscramble\unscramble\utility.h(43): warning C4018: '<' : signed/unsigned mismatch
 c:\git\unscramble\unscramble\primenumber.h(16): warning C4018: '<' : signed/unsigned mismatch
 c:\git\unscramble\unscramble\stringcombination.h(12): warning C4018: '<' : signed/unsigned mismatch
 c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(180): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
@@ -28,7 +28,7 @@ c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(180): war
           [
               _Traits=std::_Tmap_traits<MAPM,std::list<std::string>,std::less<MAPM>,std::allocator<std::pair<const MAPM,std::list<std::string>>>,false>
           ]
-          c:\git\unscramble\unscramble\primetoword.h(11) : see reference to class template instantiation 'std::map<_Kty,_Ty>' being compiled
+          c:\git\unscramble\unscramble\utility.h(33) : see reference to class template instantiation 'std::map<_Kty,_Ty>' being compiled
           with
           [
               _Kty=MAPM,

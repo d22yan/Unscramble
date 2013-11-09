@@ -4,6 +4,7 @@
 // generate prime word list
 // check input feed contains correct format and requirements (PrimeWordList requires check on input if it is word)
 // delimiter
+// create DisplayColumn method
 
 #include <algorithm>
 #include <fstream> 
@@ -39,6 +40,6 @@ typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 
 void main(int argc, char** argv) {
 	Unscramble test = Unscramble();
-	test.UnscrambleString("Aaron");
+	test.UnscrambleString("Aaronitice");
 	std::cin.ignore();
 }
