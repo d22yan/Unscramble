@@ -1,10 +1,9 @@
 // handle insertion of the same word into the primedictionary
-// slow construction of the dictionary, possibly avoid the usage of iostream
-// refactor read file http://stackoverflow.com/questions/7868936/c-read-file-line-by-line
-// generate prime word list
 // check input feed contains correct format and requirements (PrimeWordList requires check on input if it is word)
 // delimiter
 // create DisplayColumn method
+// refactor letter frequency feed, read from file instead of hardcoding
+// throwing exception, incorrect size of commonalphabetvector
 
 #include <algorithm>
 #include <fstream> 
