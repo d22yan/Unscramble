@@ -32,8 +32,7 @@ void Unscramble::UnscrambleString(std::string ScrambledWord) {
 			Result.insert(pair_mapm_liststring(Prime,MatchedPrimeList));
 		}
 	}
-	DisplayResult(Result);
-	DisplayResult(PrimeToWordInstance->PrimeDictionary);
+	Utility::DisplayDictionary(Result);
 }
 
 void Unscramble::ReadDictionary() {
