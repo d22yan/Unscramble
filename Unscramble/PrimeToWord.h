@@ -26,7 +26,7 @@ PrimeToWord::~PrimeToWord() {
 PrimeToWord* PrimeToWord::GetInstance() {
 	if(!instanceFlag) {
 		single = new PrimeToWord();
-		instanceFlag = false;
+		instanceFlag = true;
 		return single;
 	}
 	return single;
@@ -53,19 +53,21 @@ void PrimeToWord::InsertWord(std::string word) {
 	}
 	if (valid) {
 		std::string LowerCased = Utility::ToLowerCase(word);
-		MAPM PrimeNumber= WordToPrime(LowerCased);
+		MAPM PrimeNumber = WordToPrime(LowerCased);
 		InsertPrime(PrimeNumber, LowerCased);
 	}
 }
 
-void PrimeToWord::InsertPrime(MAPM PrimeNumber, std::string word) {
-	if (PrimeDictionary.find(PrimeNumber) == PrimeDictionary.end()) {
+void PrimeToWord::InsertPrime(MAPM Prime, std::string word) {
+	char PrimeString[MAXIMUM_DIGIT];
+	Prime.toIntegerString(PrimeString);
+	if (PrimeDictionary.find(Prime) == PrimeDictionary.end()) {
 		std::list<std::string> NewList;
 		NewList.insert(NewList.begin(),word);
 		PrimeDictionary.insert(pair_mapm_liststring(WordToPrime(word),NewList));
 	}
 	else {
-		PrimeDictionary.at(PrimeNumber).insert(PrimeDictionary.at(PrimeNumber).begin(),word);
+		PrimeDictionary.at(Prime).insert(PrimeDictionary.at(Prime).begin(),word);
 	}
 }
 

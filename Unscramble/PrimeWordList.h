@@ -3,25 +3,27 @@
 
 class PrimeWordList {
 	public:
-		static std::string ConvertToPrimeDictionary(std::string);
-		static void ReadPrimeDictionary();
+		static std::string PrimedDictionaryConverter(std::string);
+		static void ReadPrimedDictionary();
 };
 
-std::string PrimeWordList::ConvertToPrimeDictionary(std::string input) {
+std::string PrimeWordList::PrimedDictionaryConverter(std::string input) {
 	std::string	DictioanryFileName = input;
-	std::string NewDictionaryFileName = "primed" + input;
+	std::string NewDictionaryFileName = PrimedDictionarySuffix + input;
 	std::ifstream IStreamFile(input);
 	std::ofstream OStreamFile(NewDictionaryFileName);
 	if(IStreamFile.is_open() && OStreamFile.is_open()) {
-		std::string Line;
+		std::string Word;
+		int counter = 0;
 		while(!IStreamFile.eof()) {
-			IStreamFile >> Line;
-			MAPM Prime = PrimeToWord::WordToPrime(Line);
+			IStreamFile >> Word;
+			MAPM Prime = PrimeToWord::WordToPrime(Word);
 			char PrimeString[MAXIMUM_DIGIT];
 			Prime.toIntegerString(PrimeString);
 			std::string NewLine(PrimeString);
-			NewLine.append(" " + Line);
+			NewLine.append(PrimedDictionaryDelimiter + Word);
 			OStreamFile << NewLine << std::endl;
+			std::cout << counter++ << " " << NewLine << std::endl;
 		}
 	}
 	IStreamFile.close();
@@ -29,20 +31,22 @@ std::string PrimeWordList::ConvertToPrimeDictionary(std::string input) {
 	return NewDictionaryFileName;
 }
 
-void PrimeWordList::ReadPrimeDictionary() {
+void PrimeWordList::ReadPrimedDictionary() {
 	std::ifstream IStreamFile;
-	IStreamFile.open(DictionaryFileName);
+	IStreamFile.open(PrimedDictionaryFileName);
 	if (IStreamFile.is_open()) {
 		std::string Line;
+		int counter = 0;
 		while(!IStreamFile.eof()) {
-			IStreamFile >> Line;
+			std::getline(IStreamFile, Line);
 			std::vector<std::string> SplitLine;
-			boost::split(SplitLine, Line, ::isspace);
+			boost::split(SplitLine, Line, boost::is_any_of(" "));
 			if (SplitLine.size() == 2) {
-				std::string PrimeString = SplitLine[0];
-				std::string Word = SplitLine[1];
+				std::string PrimeString = SplitLine.at(0);
+				std::string Word = Utility::ToLowerCase(SplitLine.at(1));
 				const char* PrimeChars = PrimeString.c_str();
 				MAPM Prime = PrimeChars;
+				std::cout << counter++ << std::setw(20) << PrimeChars << std::setw(20) << Word << std::endl;
 				PrimeToWord::GetInstance()->InsertPrime(Prime, Word);
 			}
 		}
