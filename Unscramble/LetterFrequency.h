@@ -41,13 +41,9 @@ void LetterFrequency::GenerateLetterPrimeDictionary() {
 	LetterFrequency *CommonAlphabetInstance = LetterFrequency::GetInstance();
 	std::vector<int> PrimeNumbersVector = PrimeNumber::GeneratePrimes(ALPHABET_COUNT);
 	std::vector<char> LetterFrequencyVector = ReadLetterFrequencyList();
-	if( LetterFrequencyVector.size() == ALPHABET_COUNT ) {
-		for (int i = 0; i < ALPHABET_COUNT; i++) {
-			CommonAlphabetInstance->LetterPrimeDictionary.insert(std::pair<char,int>(LetterFrequencyVector.at(i),PrimeNumbersVector.at(i)));
-		}
-	}
-	else {
-		std::cout << "LetterFrequencyVector.size() != Alphabet_Count" << std::endl;
+	assert(LetterFrequencyVector.size() == ALPHABET_COUNT, InvalidLetterFrequencyVectorSizeMessage);
+	for (int i = 0; i < ALPHABET_COUNT; i++) {
+		CommonAlphabetInstance->LetterPrimeDictionary.insert(std::pair<char,int>(LetterFrequencyVector.at(i),PrimeNumbersVector.at(i)));
 	}
 }
 

@@ -1,6 +1,7 @@
 ﻿  main.cpp
 c:\git\unscramble\unscramble\utility.h(43): warning C4018: '<' : signed/unsigned mismatch
 c:\git\unscramble\unscramble\primenumber.h(16): warning C4018: '<' : signed/unsigned mismatch
+c:\git\unscramble\unscramble\letterfrequency.h(44): warning C4002: too many actual parameters for macro 'assert'
 c:\git\unscramble\unscramble\stringcombination.h(12): warning C4018: '<' : signed/unsigned mismatch
 c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(180): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
           c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(179) : while compiling class template member function 'bool std::less<_Ty>::operator ()(const _Ty &,const _Ty &) const'
@@ -34,31 +35,4 @@ c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(180): war
               _Kty=MAPM,
               _Ty=std::list<std::string>
           ]
-c:\program files (x86)\microsoft visual studio 11.0\vc\include\xutility(2176): error C4996: 'std::_Copy_impl': Function call with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
-          c:\program files (x86)\microsoft visual studio 11.0\vc\include\xutility(2157) : see declaration of 'std::_Copy_impl'
-          c:\program files (x86)\microsoft visual studio 11.0\vc\include\boost\algorithm\string\detail\classification.hpp(102) : see reference to function template instantiation '_OutIt std::copy<const char*,char*>(_InIt,_InIt,_OutIt)' being compiled
-          with
-          [
-              _OutIt=char *,
-              _InIt=const char *
-          ]
-          c:\program files (x86)\microsoft visual studio 11.0\vc\include\boost\algorithm\string\classification.hpp(206) : see reference to function template instantiation 'boost::algorithm::detail::is_any_ofF<CharT>::is_any_ofF<boost::iterator_range<IteratorT>>(const RangeT &)' being compiled
-          with
-          [
-              CharT=char,
-              IteratorT=const char *,
-              RangeT=boost::iterator_range<const char *>
-          ]
-          c:\program files (x86)\microsoft visual studio 11.0\vc\include\boost\algorithm\string\classification.hpp(206) : see reference to function template instantiation 'boost::algorithm::detail::is_any_ofF<CharT>::is_any_ofF<boost::iterator_range<IteratorT>>(const RangeT &)' being compiled
-          with
-          [
-              CharT=char,
-              IteratorT=const char *,
-              RangeT=boost::iterator_range<const char *>
-          ]
-          c:\git\unscramble\unscramble\primeddictionary.h(85) : see reference to function template instantiation 'boost::algorithm::detail::is_any_ofF<CharT> boost::algorithm::is_any_of<const char[2]>(RangeT (&))' being compiled
-          with
-          [
-              CharT=char,
-              RangeT=const char [2]
-          ]
+  Unscramble.vcxproj -> C:\git\Unscramble\Debug\Unscramble.exe
