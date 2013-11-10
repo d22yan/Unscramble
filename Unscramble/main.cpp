@@ -1,6 +1,5 @@
 // handle insertion of the same word into the primedictionary
 // check input feed contains correct format and requirements (PrimeWordList requires check on input if it is word)
-// delimiter
 // create DisplayColumn method
 // std::string char = Line[0], refactor possible out of range bound exception
 // throwing exception, incorrect size of commonalphabetvector
@@ -34,6 +33,7 @@ const std::string PrimedDictionaryDelimiter = " ";
 const std::string PrimedDictionarySuffix = "primed";
 const std::string PrimedDictionaryFileName = "primeddictionary2.txt";
 const std::string LetterFrequencyListFileName = "LetterFrequencyList.txt";
+const std::string InvalidLetterFrequencyVectorSizeMessage = "LetterFrequencyVector.size() != Alphabet_Count";
 typedef std::map<MAPM,std::list<std::string>> map_mapm_liststring;
 typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 
