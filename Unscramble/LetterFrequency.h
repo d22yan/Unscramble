@@ -8,6 +8,7 @@ class LetterFrequency {
 		static bool instanceFlag;
 		static LetterFrequency* single;
 		static void GenerateLetterPrimeDictionary();
+		static std::vector<char> ReadLetterFrequencyList();
 	public:
 		std::map<char, int> LetterPrimeDictionary;
 		static LetterFrequency *GetInstance();
@@ -18,7 +19,7 @@ bool LetterFrequency::instanceFlag = false;
 LetterFrequency* LetterFrequency::single = NULL;
 
 LetterFrequency::LetterFrequency() {
-
+	ReadLetterFrequencyList();
 }
 
 LetterFrequency::~LetterFrequency() {
@@ -39,7 +40,7 @@ LetterFrequency* LetterFrequency::GetInstance() {
 void LetterFrequency::GenerateLetterPrimeDictionary() {
 	LetterFrequency *CommonAlphabetInstance = LetterFrequency::GetInstance();
 	std::vector<int> PrimeNumbersVector = PrimeNumber::GeneratePrimes(ALPHABET_COUNT);
-	std::vector<char> LetterFrequencyVector = GenerateLetterFrequency();
+	std::vector<char> LetterFrequencyVector = ReadLetterFrequencyList();
 	if( LetterFrequencyVector.size() == ALPHABET_COUNT ) {
 		for (int i = 0; i < ALPHABET_COUNT; i++) {
 			CommonAlphabetInstance->LetterPrimeDictionary.insert(std::pair<char,int>(LetterFrequencyVector.at(i),PrimeNumbersVector.at(i)));
@@ -79,6 +80,23 @@ std::vector<char> LetterFrequency::GenerateLetterFrequency() {
 	myvector.push_back('q');
 	myvector.push_back('z');
 	return myvector;
+}
+
+std::vector<char> LetterFrequency::ReadLetterFrequencyList() {
+	std::vector<char> LetterFrequencyVector;
+	std::ifstream IStreamFile(LetterFrequencyListFileName);
+	if(IStreamFile.is_open()) {
+		std::string Line;
+		while (!IStreamFile.eof()) {
+			IStreamFile >> Line;
+			char Letter = Line[0];
+			if (isalpha(Letter)) {
+				LetterFrequencyVector.push_back(Letter);
+			}
+		}
+	}
+	IStreamFile.close();
+	return LetterFrequencyVector;
 }
 
 #endif
