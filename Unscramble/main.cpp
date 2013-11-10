@@ -2,7 +2,7 @@
 // check input feed contains correct format and requirements (PrimeWordList requires check on input if it is word)
 // delimiter
 // create DisplayColumn method
-// refactor letter frequency feed, read from file instead of hardcoding
+// std::string char = Line[0], refactor possible out of range bound exception
 // throwing exception, incorrect size of commonalphabetvector
 
 #include <algorithm>
@@ -26,6 +26,7 @@
 const std::string PrimedDictionaryDelimiter = " ";
 const std::string PrimedDictionarySuffix = "primed";
 const std::string PrimedDictionaryFileName = "primeddictionary2.txt";
+const std::string LetterFrequencyListFileName = "LetterFrequencyList.txt";
 typedef std::map<MAPM,std::list<std::string>> map_mapm_liststring;
 typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 

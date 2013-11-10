@@ -21,7 +21,7 @@
     <Text Include="dictionary2.txt">
       <Filter>Resource Files</Filter>
     </Text>
-    <Text Include="LetterFrequency.txt">
+    <Text Include="LetterFrequencyList.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

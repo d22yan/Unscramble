@@ -13,7 +13,7 @@
   <ItemGroup>
     <Text Include="dictionary1.txt" />
     <Text Include="dictionary2.txt" />
-    <Text Include="LetterFrequency.txt" />
+    <Text Include="LetterFrequencyList.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
