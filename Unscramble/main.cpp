@@ -5,6 +5,12 @@
 // std::string char = Line[0], refactor possible out of range bound exception
 // throwing exception, incorrect size of commonalphabetvector
 
+// http://stackoverflow.com/questions/1301277/c-boost-whats-the-cause-of-this-warning
+#if defined(_MSC_VER) && _MSC_VER >= 1400 
+#pragma warning(push) 
+#pragma warning(disable:4996) 
+#endif 
+
 #include <algorithm>
 #include <fstream> 
 #include <iostream>
@@ -16,6 +22,7 @@
 #include <string>
 #include <vector>
 
+// http://stackoverflow.com/questions/2629421/how-to-use-boost-in-visual-studio-2010
 #include <boost\algorithm\string.hpp>
 #include <boost\algorithm\string\split.hpp>
 #include <boost\dynamic_bitset\dynamic_bitset.hpp>
@@ -42,3 +49,7 @@ void main(int argc, char** argv) {
 	test.UnscrambleString("Aaronitice");
 	std::cin.ignore();
 }
+
+#if defined(_MSC_VER) && _MSC_VER >= 1400 
+#pragma warning(pop) 
+#endif 
