@@ -28,21 +28,23 @@
 #include <M_APM.H> // http://www.tc.umn.edu/~ringx004/mapm-main.html
 
 #define ALPHABET_COUNT 26
-#define MAXIMUM_DIGIT 256
 
 //***** MODIFY *****//
 
-const bool ConvertToPrimedDictionary = false;
+#define IOMANIP_SETW 30
+#define MAXIMUM_DIGIT 256
+const bool ConvertToPrimedDictionary = true;
 const bool ReadPrimedDictyionary = true;
 const std::string DictionaryFileName = "Dictionary.txt";
-const std::string PrimedDictionaryFileName = "PrimedDictionary.txt";
 
 //******* END *******//
 
 const std::string PrimedDictionaryDelimiter = " ";
 const std::string PrimedDictionarySuffix = "Primed";
+const std::string PrimedDictionaryFileName = PrimedDictionarySuffix + DictionaryFileName;
 const std::string LetterFrequencyListFileName = "LetterFrequencyList.txt";
 const std::string InvalidLetterFrequencyVectorSizeMessage = "LetterFrequencyVector.size() != Alphabet_Count";
+
 typedef std::map<MAPM,std::list<std::string>> map_mapm_liststring;
 typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 
@@ -54,7 +56,7 @@ typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 
 void main(int argc, char** argv) {
 	Unscramble test = Unscramble();
-	test.UnscrambleString("Aaronitice");
+	test.UnscrambleString("asdf");
 	std::cin.ignore();
 }
 

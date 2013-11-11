@@ -7,7 +7,7 @@ class Utility {
 		static std::string CharToString(char);
 		static std::string SortCharacters(std::string);
 		static std::string ToLowerCase(std::string);
-		static std::vector<int> GeneratePrimes (int);
+		static std::vector<int> GeneratePrimes(int);
 		static void DisplayDictionary(map_mapm_liststring);
 		static void IncrementBit(boost::dynamic_bitset<> &);
 };
@@ -21,9 +21,7 @@ std::string Utility::CharToString(char character) {
 }
 
 bool Utility::IsValidWord(std::string word) {
-	if ( word.empty() ) {
-		return false;
-	}
+	if ( word.empty() ) { return false; }
 	for (std::string::iterator iterator = word.begin(), end = word.end(); iterator != end; ++iterator) {
 		if ( !isalpha(*iterator) ) {
 			return false;

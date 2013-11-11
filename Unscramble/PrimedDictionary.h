@@ -94,7 +94,7 @@ void PrimedDictionary::ReadPrimedDictionary() {
 					std::string Word = Utility::ToLowerCase(SplitLine.at(1));
 					const char* PrimeChars = PrimeString.c_str();
 					MAPM Prime = PrimeChars;
-					std::cout << counter++ << std::setw(20) << PrimeChars << std::setw(20) << Word << std::endl;
+					std::cout << counter++ << std::setw(IOMANIP_SETW) << PrimeChars << std::setw(IOMANIP_SETW) << Word << std::endl;
 					single->InsertPrimeAndWord(Prime, Word);
 				}
 			}
