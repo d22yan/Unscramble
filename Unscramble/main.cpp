@@ -33,8 +33,8 @@
 
 #define IOMANIP_SETW 30
 #define MAXIMUM_DIGIT 256
-const bool ConvertToPrimedDictionary = true;
-const bool ReadPrimedDictyionary = true;
+#define CONVERT_TO_PRIMED_DICTIONARY false
+#define READ_PRIMED_DICTIONARY false
 const std::string DictionaryFileName = "Dictionary.txt";
 
 //******* END *******//
@@ -56,7 +56,7 @@ typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 
 void main(int argc, char** argv) {
 	Unscramble test = Unscramble();
-	test.UnscrambleString("asdf");
+	test.UnscrambleString("acetose");
 	std::cin.ignore();
 }
 
