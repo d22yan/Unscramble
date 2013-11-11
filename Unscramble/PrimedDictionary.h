@@ -10,7 +10,7 @@ class PrimedDictionary {
 	public:
 		map_mapm_liststring PrimeDictionary;
 		static PrimedDictionary* GetInstance();
-		static std::string ConvertToPrimedDictionary();
+		static void ConvertToPrimedDictionary();
 		static void ReadDictionary();
 		static void ReadPrimedDictionary();
 		void InsertWord(std::string);
@@ -35,29 +35,30 @@ PrimedDictionary* PrimedDictionary::GetInstance() {
 	return single;
 }
 
-std::string PrimedDictionary::ConvertToPrimedDictionary() {
-	std::string NewDictionaryFileName = PrimedDictionarySuffix + DictionaryFileName;
+void PrimedDictionary::ConvertToPrimedDictionary() {
 	std::ifstream IStreamFile(DictionaryFileName);
-	std::ofstream OStreamFile(NewDictionaryFileName);
-	if(IStreamFile.is_open() && OStreamFile.is_open()) {
-		std::string Word;
-		int counter = 0;
-		while(!IStreamFile.eof()) {
-			IStreamFile >> Word;
-			if ( Utility::IsValidWord(Word) ) {
-				MAPM Prime = single->WordToPrime(Word);
-				char PrimeString[MAXIMUM_DIGIT];
-				Prime.toIntegerString(PrimeString);
-				std::string NewLine(PrimeString);
-				NewLine.append(PrimedDictionaryDelimiter + Word);
-				OStreamFile << NewLine << std::endl;
-				std::cout << counter++ << " " << NewLine << std::endl;
+	if(IStreamFile.is_open()) {
+		std::string NewDictionaryFileName = PrimedDictionarySuffix + DictionaryFileName;
+		std::ofstream OStreamFile(NewDictionaryFileName);
+		if (OStreamFile.is_open()) {
+			std::string Word;
+			int counter = 0;
+			while(!IStreamFile.eof()) {
+				IStreamFile >> Word;
+				if ( Utility::IsValidWord(Word) ) {
+					MAPM Prime = single->WordToPrime(Word);
+					char PrimeString[MAXIMUM_DIGIT];
+					Prime.toIntegerString(PrimeString);
+					std::string NewLine(PrimeString);
+					NewLine.append(PrimedDictionaryDelimiter + Word);
+					OStreamFile << NewLine << std::endl;
+					std::cout << counter++ << " " << NewLine << std::endl;
+				}
 			}
 		}
+		OStreamFile.close();
 	}
 	IStreamFile.close();
-	OStreamFile.close();
-	return NewDictionaryFileName;
 }
 
 void PrimedDictionary::ReadDictionary() {
