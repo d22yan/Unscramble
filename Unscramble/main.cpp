@@ -1,6 +1,7 @@
 // handle insertion of the same word into the primedictionary
 // create DisplayColumn method
 // std::string char = Line[0], possible out of range bound exception
+// display in lexicographically order
 
 // http://stackoverflow.com/questions/1301277/c-boost-whats-the-cause-of-this-warning
 #if defined(_MSC_VER) && _MSC_VER >= 1400 
@@ -31,9 +32,9 @@
 
 //***** MODIFY *****//
 
-const bool ConvertToPrimedDictionary = true;
+const bool ConvertToPrimedDictionary = false;
 const bool ReadPrimedDictyionary = true;
-const std::string DictionaryFileName = "Dictionary2.txt";
+const std::string DictionaryFileName = "Dictionary.txt";
 const std::string PrimedDictionaryFileName = "PrimedDictionary.txt";
 
 //******* END *******//
@@ -53,7 +54,7 @@ typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 
 void main(int argc, char** argv) {
 	Unscramble test = Unscramble();
-	//test.UnscrambleString("Aaronitice");
+	test.UnscrambleString("Aaronitice");
 	std::cin.ignore();
 }
 
