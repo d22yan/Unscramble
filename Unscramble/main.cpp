@@ -1,8 +1,6 @@
 // handle insertion of the same word into the primedictionary
-// check input feed contains correct format and requirements (PrimeWordList requires check on input if it is word)
 // create DisplayColumn method
-// std::string char = Line[0], refactor possible out of range bound exception
-// throwing exception, incorrect size of commonalphabetvector
+// std::string char = Line[0], possible out of range bound exception
 
 // http://stackoverflow.com/questions/1301277/c-boost-whats-the-cause-of-this-warning
 #if defined(_MSC_VER) && _MSC_VER >= 1400 
@@ -25,20 +23,29 @@
 #include <boost\algorithm\string.hpp>
 #include <boost\algorithm\string\split.hpp>
 #include <boost\dynamic_bitset\dynamic_bitset.hpp>
+// Referencing mapm.lib: Project > Properties > Configuration Options > Linker > Input > Additional Dependencies
 #include <M_APM.H> // http://www.tc.umn.edu/~ringx004/mapm-main.html
 
 #define ALPHABET_COUNT 26
 #define MAXIMUM_DIGIT 256
+
+//***** MODIFY *****//
+
+const bool ConvertToPrimedDictionary = true;
+const bool ReadPrimedDictyionary = true;
+const std::string DictionaryFileName = "Dictionary2.txt";
+const std::string PrimedDictionaryFileName = "PrimedDictionary.txt";
+
+//******* END *******//
+
 const std::string PrimedDictionaryDelimiter = " ";
-const std::string PrimedDictionarySuffix = "primed";
-const std::string PrimedDictionaryFileName = "primeddictionary2.txt";
+const std::string PrimedDictionarySuffix = "Primed";
 const std::string LetterFrequencyListFileName = "LetterFrequencyList.txt";
 const std::string InvalidLetterFrequencyVectorSizeMessage = "LetterFrequencyVector.size() != Alphabet_Count";
 typedef std::map<MAPM,std::list<std::string>> map_mapm_liststring;
 typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 
 #include "Utility.h"
-#include "PrimeNumber.h"
 #include "LetterFrequency.h"
 #include "StringCombination.h"
 #include "PrimedDictionary.h"
@@ -46,7 +53,7 @@ typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
 
 void main(int argc, char** argv) {
 	Unscramble test = Unscramble();
-	test.UnscrambleString("Aaronitice");
+	//test.UnscrambleString("Aaronitice");
 	std::cin.ignore();
 }
 

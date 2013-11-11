@@ -39,7 +39,7 @@ LetterFrequency* LetterFrequency::GetInstance() {
 
 void LetterFrequency::GenerateLetterPrimeDictionary() {
 	LetterFrequency *CommonAlphabetInstance = LetterFrequency::GetInstance();
-	std::vector<int> PrimeNumbersVector = PrimeNumber::GeneratePrimes(ALPHABET_COUNT);
+	std::vector<int> PrimeNumbersVector = Utility::GeneratePrimes(ALPHABET_COUNT);
 	std::vector<char> LetterFrequencyVector = ReadLetterFrequencyList();
 	assert(LetterFrequencyVector.size() == ALPHABET_COUNT, InvalidLetterFrequencyVectorSizeMessage);
 	for (int i = 0; i < ALPHABET_COUNT; i++) {

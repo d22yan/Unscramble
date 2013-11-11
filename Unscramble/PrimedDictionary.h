@@ -10,7 +10,7 @@ class PrimedDictionary {
 	public:
 		map_mapm_liststring PrimeDictionary;
 		static PrimedDictionary* GetInstance();
-		static std::string ConvertToPrimedDictionary(std::string);
+		static std::string ConvertToPrimedDictionary();
 		static void ReadDictionary();
 		static void ReadPrimedDictionary();
 		void InsertWord(std::string);
@@ -35,23 +35,24 @@ PrimedDictionary* PrimedDictionary::GetInstance() {
 	return single;
 }
 
-std::string PrimedDictionary::ConvertToPrimedDictionary(std::string input) {
-	std::string	DictioanryFileName = input;
-	std::string NewDictionaryFileName = PrimedDictionarySuffix + input;
-	std::ifstream IStreamFile(input);
+std::string PrimedDictionary::ConvertToPrimedDictionary() {
+	std::string NewDictionaryFileName = PrimedDictionarySuffix + DictionaryFileName;
+	std::ifstream IStreamFile(DictionaryFileName);
 	std::ofstream OStreamFile(NewDictionaryFileName);
 	if(IStreamFile.is_open() && OStreamFile.is_open()) {
 		std::string Word;
 		int counter = 0;
 		while(!IStreamFile.eof()) {
 			IStreamFile >> Word;
-			MAPM Prime = single->WordToPrime(Word);
-			char PrimeString[MAXIMUM_DIGIT];
-			Prime.toIntegerString(PrimeString);
-			std::string NewLine(PrimeString);
-			NewLine.append(PrimedDictionaryDelimiter + Word);
-			OStreamFile << NewLine << std::endl;
-			std::cout << counter++ << " " << NewLine << std::endl;
+			if ( Utility::IsValidWord(Word) ) {
+				MAPM Prime = single->WordToPrime(Word);
+				char PrimeString[MAXIMUM_DIGIT];
+				Prime.toIntegerString(PrimeString);
+				std::string NewLine(PrimeString);
+				NewLine.append(PrimedDictionaryDelimiter + Word);
+				OStreamFile << NewLine << std::endl;
+				std::cout << counter++ << " " << NewLine << std::endl;
+			}
 		}
 	}
 	IStreamFile.close();
@@ -61,13 +62,16 @@ std::string PrimedDictionary::ConvertToPrimedDictionary(std::string input) {
 
 void PrimedDictionary::ReadDictionary() {
 	std::ifstream IStreamFile;
-	IStreamFile.open(PrimedDictionaryFileName);
+	IStreamFile.open(DictionaryFileName);
 	if (IStreamFile.is_open()) {
-		std::string output;
+		std::string Line;
 		while(!IStreamFile.eof()) {
-			IStreamFile >> output;
-			std::cout << output << std::endl;
-			single->InsertWord(output);
+			IStreamFile >> Line;
+			if ( Utility::IsValidWord(Line) ) {
+				std::string Word = Utility::ToLowerCase(Line);
+				single->InsertWord(Word);
+				std::cout << Word << std::endl;
+			}
 		}
 	}
 	IStreamFile.close();
@@ -84,12 +88,14 @@ void PrimedDictionary::ReadPrimedDictionary() {
 			std::vector<std::string> SplitLine;
 			boost::split(SplitLine, Line, boost::is_any_of(" "));
 			if (SplitLine.size() == 2) {
-				std::string PrimeString = SplitLine.at(0);
-				std::string Word = Utility::ToLowerCase(SplitLine.at(1));
-				const char* PrimeChars = PrimeString.c_str();
-				MAPM Prime = PrimeChars;
-				std::cout << counter++ << std::setw(20) << PrimeChars << std::setw(20) << Word << std::endl;
-				single->InsertPrimeAndWord(Prime, Word);
+				if ( Utility::IsValidWord(SplitLine.at(1)) ) {
+					std::string PrimeString = SplitLine.at(0);
+					std::string Word = Utility::ToLowerCase(SplitLine.at(1));
+					const char* PrimeChars = PrimeString.c_str();
+					MAPM Prime = PrimeChars;
+					std::cout << counter++ << std::setw(20) << PrimeChars << std::setw(20) << Word << std::endl;
+					single->InsertPrimeAndWord(Prime, Word);
+				}
 			}
 		}
 	}
@@ -108,18 +114,8 @@ MAPM PrimedDictionary::WordToPrime(std::string word) {
 }
 
 void PrimedDictionary::InsertWord(std::string word) {
-	bool valid = true;
-	int WordLength = word.length();
-	for (std::string::iterator iterator = word.begin(), end = word.end(); iterator != end; ++iterator) {
-		if (!isalpha(*iterator)) {
-			valid = false;
-		}
-	}
-	if (valid) {
-		std::string LowerCased = Utility::ToLowerCase(word);
-		MAPM PrimeNumber = WordToPrime(LowerCased);
-		InsertPrimeAndWord(PrimeNumber, LowerCased);
-	}
+	MAPM PrimeNumber = WordToPrime(word);
+	InsertPrimeAndWord(PrimeNumber, word);
 }
 
 void PrimedDictionary::InsertPrimeAndWord(MAPM Prime, std::string word) {

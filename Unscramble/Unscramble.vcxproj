@@ -11,8 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="dictionary1.txt" />
-    <Text Include="dictionary2.txt" />
     <Text Include="LetterFrequencyList.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -20,7 +18,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LetterFrequency.h" />
-    <ClInclude Include="PrimeNumber.h" />
     <ClInclude Include="PrimedDictionary.h" />
     <ClInclude Include="StringCombination.h" />
     <ClInclude Include="Unscramble.h" />
