@@ -23,7 +23,7 @@ Unscramble::Unscramble() {
 void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	if(ScrambledWord.empty()) { return; }
 	MAPM Prime;
-	std::list<std::string> AllCombinationList = StringCombination::GenerateCombination(ScrambledWord);
+	std::list<std::string> AllCombinationList = Utility::GenerateCombination(ScrambledWord);
 	map_mapm_liststring Result;
 	for (std::list<std::string>::iterator iterator = AllCombinationList.begin(), end = AllCombinationList.end(); iterator != end; ++iterator) {
 		Prime = PrimedDictionary::WordToPrime(*iterator);
