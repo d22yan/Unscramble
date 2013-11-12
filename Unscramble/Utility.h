@@ -2,15 +2,45 @@
 #define _UTILITY_H
 
 class Utility {
+	private:
+		static void DisplayPermutation_Permutate(int, std::vector<char>, std::vector<char>, int);
 	public:
 		static bool IsValidWord(std::string);
 		static std::string CharToString(char);
 		static std::string SortCharacters(std::string);
 		static std::string ToLowerCase(std::string);
+		static std::string BinaryMaskString(boost::dynamic_bitset<>, std::vector<char>);
+		static std::list<std::string> GenerateCombination(std::string);
 		static std::vector<int> GeneratePrimes(int);
 		static void DisplayDictionary(map_mapm_liststring);
+		static void DisplayPermutation(char*);
 		static void IncrementBit(boost::dynamic_bitset<> &);
 };
+
+void Utility::DisplayPermutation_Permutate(int size ,std::vector<char> input, std::vector<char> output, int level) {
+	if (level == size) {
+		for ( int i = 0; i < size; i++) {
+			std::cout << output.at(i);
+		}
+		std::cout << std::endl;
+	}
+	else {
+		for( int i = 0; i < size; i++) { 
+			if ( input.at(i) != NULL ) {
+				char tmp = input.at(i);
+				input.at(i) = NULL;
+				for( int j = 0; j < size; j++) {
+					if ( output.at(j) == NULL ) {
+						std::vector<char> new_output = output;
+						new_output.at(j) = tmp;
+						DisplayPermutation_Permutate(size, input,new_output,level+1);
+					}
+				}
+				break;
+			}
+		}
+	}
+}
 
 std::string Utility::CharToString(char character) {
 	std::string OutputString;
@@ -63,6 +93,45 @@ std::vector<int> Utility::GeneratePrimes(int size) {
 		counter+=2;
 	}
 	return prime;
+}
+
+std::string Utility::BinaryMaskString(boost::dynamic_bitset<> binary, std::vector<char> wordvector) {
+	std::string result; 
+	for ( int i = 0; i < binary.size(); i++ ) {
+		if (binary[i] == 1) {
+			result.append(Utility::CharToString(wordvector.at(i)));
+		}
+	}
+	return result;
+}
+
+std::list<std::string> Utility::GenerateCombination(std::string word) {
+	int StringLength = word.length();
+	std::list<std::string> CombinationList;
+	std::string SortedString= Utility::SortCharacters(word);
+	std::vector<char> WordVector;
+	for( int i = 0; i < StringLength; i++) {
+		WordVector.push_back(SortedString[i]);
+	}
+	boost::dynamic_bitset<> Combination(StringLength);
+	MAPM Counter;
+	MAPM MaxCombination = pow(2,StringLength);
+	for ( Counter = 1; Counter < MaxCombination; Counter++ ) {
+		Utility::IncrementBit(Combination);
+		CombinationList.insert(CombinationList.begin(),BinaryMaskString(Combination,WordVector));
+	}
+	return CombinationList;
+}
+
+void Utility::DisplayPermutation(char* input) {
+	int input_size = strlen(input);
+	std::vector<char> input_vector;
+	std::vector<char> output_vector (input_size,NULL);
+	for( int i = 0; i < input_size; i++) {
+		input_vector.push_back(*input);
+		input++;
+	}
+	DisplayPermutation_Permutate(input_size, input_vector, output_vector, 0);
 }
 
 void Utility::DisplayDictionary(map_mapm_liststring dictionary) {

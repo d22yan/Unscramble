@@ -1,5 +1,38 @@
-﻿Build started 2013-11-10 11:28:14 PM.
-
-Build succeeded.
-
-Time Elapsed 00:00:00.15
+﻿  main.cpp
+c:\git\unscramble\unscramble\utility.h(53): warning C4018: '<' : signed/unsigned mismatch
+c:\git\unscramble\unscramble\utility.h(78): warning C4018: '<' : signed/unsigned mismatch
+c:\git\unscramble\unscramble\letterfrequency.h(44): warning C4002: too many actual parameters for macro 'assert'
+c:\git\unscramble\unscramble\stringcombination.h(12): warning C4018: '<' : signed/unsigned mismatch
+c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(180): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
+          c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(179) : while compiling class template member function 'bool std::less<_Ty>::operator ()(const _Ty &,const _Ty &) const'
+          with
+          [
+              _Ty=MAPM
+          ]
+          c:\program files (x86)\microsoft visual studio 11.0\vc\include\map(207) : see reference to function template instantiation 'bool std::less<_Ty>::operator ()(const _Ty &,const _Ty &) const' being compiled
+          with
+          [
+              _Ty=MAPM
+          ]
+          c:\program files (x86)\microsoft visual studio 11.0\vc\include\type_traits(743) : see reference to class template instantiation 'std::less<_Ty>' being compiled
+          with
+          [
+              _Ty=MAPM
+          ]
+          c:\program files (x86)\microsoft visual studio 11.0\vc\include\xtree(1028) : see reference to class template instantiation 'std::is_empty<_Ty>' being compiled
+          with
+          [
+              _Ty=std::less<MAPM>
+          ]
+          c:\program files (x86)\microsoft visual studio 11.0\vc\include\map(67) : see reference to class template instantiation 'std::_Tree<_Traits>' being compiled
+          with
+          [
+              _Traits=std::_Tmap_traits<MAPM,std::list<std::string>,std::less<MAPM>,std::allocator<std::pair<const MAPM,std::list<std::string>>>,false>
+          ]
+          c:\git\unscramble\unscramble\utility.h(68) : see reference to class template instantiation 'std::map<_Kty,_Ty>' being compiled
+          with
+          [
+              _Kty=MAPM,
+              _Ty=std::list<std::string>
+          ]
+  Unscramble.vcxproj -> C:\git\Unscramble\Debug\Unscramble.exe
