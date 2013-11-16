@@ -12,10 +12,13 @@ class Unscramble {
 Unscramble::Unscramble() {
 	m_apm_cpp_precision(MAXIMUM_DIGIT);
 	PrimeToWordInstance = PrimedDictionary::GetInstance();
-	if ( CONVERT_TO_PRIMED_DICTIONARY ) {
+	if ( ConvertToPrimedDictionary ) {
 		PrimedDictionary::ConvertToPrimedDictionary();
 	}
-	if ( READ_PRIMED_DICTIONARY ) {
+	if ( ReadDictionary) {
+		PrimedDictionary::ReadDictionary();
+	}
+	if ( ReadPrimedDictionary ) {
 		PrimedDictionary::ReadPrimedDictionary();
 	}
 }
