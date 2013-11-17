@@ -1,7 +1,6 @@
-// handle insertion of the same word into the primedictionary
 // create DisplayColumn method
-// std::string char = Line[0], possible out of range bound exception
 // display in lexicographically order
+// remove console dispaly because it reduces performance
 
 // http://stackoverflow.com/questions/1301277/c-boost-whats-the-cause-of-this-warning
 #if defined(_MSC_VER) && _MSC_VER >= 1400 
@@ -15,6 +14,7 @@
 #include <iomanip> // setw()
 #include <list>
 #include <map>
+#include <set>
 #include <sstream>
 #include <stdlib.h>
 #include <string>
@@ -46,8 +46,8 @@ bool ReadPrimedDictionary = false;
 std::string DictionaryFileName = "Dictionary.txt";
 std::string PrimedDictionaryFileName = PrimedDictionarySuffix + DictionaryFileName;
 
-typedef std::map<MAPM,std::list<std::string>> map_mapm_liststring;
-typedef std::pair<MAPM,std::list<std::string>> pair_mapm_liststring;
+typedef std::map<MAPM,std::set<std::string>> map_mapm_setstring;
+typedef std::pair<MAPM,std::set<std::string>> pair_mapm_setstring;
 
 #include "Utility.h"
 #include "LetterFrequency.h"

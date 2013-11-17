@@ -8,7 +8,7 @@ class PrimedDictionary {
 		static bool instanceFlag;
 		static PrimedDictionary* single;
 	public:
-		map_mapm_liststring PrimeDictionary;
+		map_mapm_setstring PrimeDictionary;
 		static PrimedDictionary* GetInstance();
 		static void ConvertToPrimedDictionary();
 		static void ReadDictionary();
@@ -123,12 +123,12 @@ void PrimedDictionary::InsertPrimeAndWord(MAPM Prime, std::string word) {
 	char PrimeString[MAXIMUM_DIGIT];
 	Prime.toIntegerString(PrimeString);
 	if (PrimeDictionary.find(Prime) == PrimeDictionary.end()) {
-		std::list<std::string> NewList;
-		NewList.insert(NewList.begin(),word);
-		PrimeDictionary.insert(pair_mapm_liststring(WordToPrime(word),NewList));
+		std::set<std::string> NewSet;
+		NewSet.insert(word);
+		PrimeDictionary.insert(pair_mapm_setstring(WordToPrime(word),NewSet));
 	}
 	else {
-		PrimeDictionary.at(Prime).insert(PrimeDictionary.at(Prime).begin(),word);
+		PrimeDictionary.at(Prime).insert(word);
 	}
 }
 

@@ -8,11 +8,12 @@ class Utility {
 		static std::string CharToString(char);
 		static std::string SortCharacters(std::string);
 		static std::string ToLowerCase(std::string);
-		static std::list<std::string> GenerateCombination(std::string);
-		static std::list<std::string> GeneratePermutation(std::string);
+		static std::set<std::string> GenerateCombination(std::string);
+		static std::set<std::string> GeneratePermutation(std::string);
 		static std::vector<int> GeneratePrimes(int);
-		static void DisplayDictionary(map_mapm_liststring);
+		static void DisplayDictionary(map_mapm_setstring);
 		static void DisplayList(std::list<std::string>);
+		static void DisplaySet(std::set<std::string>);
 		static void IncrementBit(boost::dynamic_bitset<> &);
 };
 
@@ -79,8 +80,8 @@ std::vector<int> Utility::GeneratePrimes(int size) {
 	return prime;
 }
 
-std::list<std::string> Utility::GenerateCombination(std::string word) {
-	std::list<std::string> CombinationList;
+std::set<std::string> Utility::GenerateCombination(std::string word) {
+	std::set<std::string> CombinationSet;
 	int StringLength = word.length();
 	std::string SortedString = Utility::SortCharacters(word);
 	std::vector<char> CharacterVector;
@@ -92,26 +93,26 @@ std::list<std::string> Utility::GenerateCombination(std::string word) {
 	MAPM MaxCombination = pow(2,StringLength);
 	for ( Counter = 1; Counter < MaxCombination; Counter++ ) {
 		Utility::IncrementBit(Combination);
-		CombinationList.insert(CombinationList.begin(),BinaryMaskString(Combination,CharacterVector));
+		CombinationSet.insert(BinaryMaskString(Combination,CharacterVector));
 	}
-	return CombinationList;
+	return CombinationSet;
 }
 
-std::list<std::string> Utility::GeneratePermutation(std::string word) {
-	std::list<std::string> PermutationList;
+std::set<std::string> Utility::GeneratePermutation(std::string word) {
+	std::set<std::string> PermutationSet;
 	int StringLength = word.length();
 	std::string SortedString = Utility::SortCharacters(word);
-	PermutationList.insert(PermutationList.end(),SortedString);
+	PermutationSet.insert(SortedString);
 	while (std::next_permutation(SortedString.begin(),SortedString.end())) {
-		PermutationList.insert(PermutationList.end(),SortedString);
+		PermutationSet.insert(SortedString);
 	}
-	return PermutationList;
+	return PermutationSet;
 }
 
-void Utility::DisplayDictionary(map_mapm_liststring dictionary) {
-	for (map_mapm_liststring::iterator iterator = dictionary.begin(), end = dictionary.end(); iterator != end; ++iterator) {
-		std::list<std::string> WordList = iterator->second;
-		for (std::list<std::string>::iterator iterator = WordList.begin(), end = WordList.end(); iterator != end; ++iterator) {
+void Utility::DisplayDictionary(map_mapm_setstring dictionary) {
+	for (map_mapm_setstring::iterator iterator = dictionary.begin(), end = dictionary.end(); iterator != end; ++iterator) {
+		std::set<std::string> WordList = iterator->second;
+		for (std::set<std::string>::iterator iterator = WordList.begin(), end = WordList.end(); iterator != end; ++iterator) {
 			std::cout << *iterator << std::endl;
 		}
 	}
@@ -119,6 +120,12 @@ void Utility::DisplayDictionary(map_mapm_liststring dictionary) {
 
 void Utility::DisplayList(std::list<std::string> list) {
 	for (std::list<std::string>::iterator iterator = list.begin(), end = list.end(); iterator != end; ++iterator) {
+		std::cout << *iterator << std::endl;
+	}
+}
+
+void Utility::DisplaySet(std::set<std::string> set) {
+	for ( std::set<std::string>::iterator iterator = set.begin(), end = set.end(); iterator != end; ++iterator) {
 		std::cout << *iterator << std::endl;
 	}
 }

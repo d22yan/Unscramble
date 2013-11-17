@@ -26,15 +26,15 @@ Unscramble::Unscramble() {
 void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	if(ScrambledWord.empty()) { return; }
 	MAPM Prime;
-	std::list<std::string> AllCombinationList = Utility::GenerateCombination(ScrambledWord);
-	map_mapm_liststring Result;
-	for (std::list<std::string>::iterator iterator = AllCombinationList.begin(), end = AllCombinationList.end(); iterator != end; ++iterator) {
+	std::set<std::string> AllCombinationSet = Utility::GenerateCombination(ScrambledWord);
+	map_mapm_setstring Result;
+	for (std::set<std::string>::iterator iterator = AllCombinationSet.begin(), end = AllCombinationSet.end(); iterator != end; ++iterator) {
 		Prime = PrimedDictionary::WordToPrime(*iterator);
 		char PrimeString[MAXIMUM_DIGIT];
 		Prime.toIntegerString(PrimeString);
 		if (Result.find(Prime) == Result.end() && PrimeToWordInstance->PrimeDictionary.find(Prime) != PrimeToWordInstance->PrimeDictionary.end()) {
-			std::list<std::string> MatchedPrimeList = PrimeToWordInstance->PrimeDictionary.at(Prime);
-			Result.insert(pair_mapm_liststring(Prime,MatchedPrimeList));
+			std::set<std::string> MatchedPrimeSet = PrimeToWordInstance->PrimeDictionary.at(Prime);
+			Result.insert(pair_mapm_setstring(Prime,MatchedPrimeSet));
 		}
 	}
 	Utility::DisplayDictionary(Result);
