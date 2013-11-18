@@ -141,4 +141,14 @@ void Utility::IncrementBit(boost::dynamic_bitset<> &input) {
 	}
 }
 
+void WriteSetToFile(std::string filename, std::set<std::string> set) {
+	std::ofstream OStreamFile(filename);
+	if (OStreamFile.is_open()) {
+		for ( std::set<std::string>::iterator iterator = set.begin(), end = set.end(); iterator != end; ++iterator) {
+			OStreamFile << *iterator << std::endl;
+		}
+	}
+	OStreamFile.close();
+}
+
 #endif

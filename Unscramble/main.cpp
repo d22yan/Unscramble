@@ -59,6 +59,7 @@ bool ReadPrimedDictionary = false;
 std::string ExecutionPath;
 std::string DictionaryFileName = "Dictionary.txt";
 std::string PrimedDictionaryFileName = PrimedDictionarySuffix + DictionaryFileName;
+std::string ResultOutputFileName = "Output.txt";
 
 typedef std::map<MAPM,std::set<std::string>> map_mapm_setstring;
 typedef std::pair<MAPM,std::set<std::string>> pair_mapm_setstring;
@@ -121,13 +122,17 @@ void Initiate() {
 	std::cout << std::endl;
 	std::string input;
 	while ( input != ":q" ) {
-		std::cout << "input: ";
-		std::cin >> input;
-		std::cout << std::endl;
-		if ( Utility::IsValidWord(input) && ConfirmExceeding15CharacterInput(input) ) {
+		if ( !Utility::IsValidWord(input) ) {
+			std::cout << "[input] -> [a-zA-Z]+" << std::endl;
+			std::cout << std::endl;
+		}
+		else if ( ConfirmExceeding15CharacterInput(input) ) {
 			Unscrambler.UnscrambleString(input);
 			std::cout << std::endl;
 		}
+		std::cout << "input: ";
+		std::cin >> input;
+		std::cout << std::endl;
 	}
 }
 
