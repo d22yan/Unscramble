@@ -3,7 +3,7 @@
 
 class Unscramble {
 	private:
-		PrimedDictionary* PrimeToWordInstance;
+		PrimedDictionary* PrimedDictionaryInstance;
 	public:
 		Unscramble();
 		void UnscrambleString(std::string);
@@ -11,7 +11,7 @@ class Unscramble {
 
 Unscramble::Unscramble() {
 	m_apm_cpp_precision(MAXIMUM_DIGIT);
-	PrimeToWordInstance = PrimedDictionary::GetInstance();
+	PrimedDictionaryInstance = PrimedDictionary::GetInstance();
 	if ( ConvertToPrimedDictionary ) {
 		PrimedDictionary::ConvertToPrimedDictionary();
 	}
@@ -24,7 +24,7 @@ Unscramble::Unscramble() {
 }
 
 void Unscramble::UnscrambleString(std::string ScrambledWord) {
-	if(ScrambledWord.empty()) { return; }
+	if(!Utility::IsValidWord(ScrambledWord)) { return; }
 	MAPM Prime;
 	std::set<std::string> AllCombinationSet = Utility::GenerateCombination(ScrambledWord);
 	map_mapm_setstring Result;
@@ -32,8 +32,8 @@ void Unscramble::UnscrambleString(std::string ScrambledWord) {
 		Prime = PrimedDictionary::WordToPrime(*iterator);
 		char PrimeString[MAXIMUM_DIGIT];
 		Prime.toIntegerString(PrimeString);
-		if (Result.find(Prime) == Result.end() && PrimeToWordInstance->PrimeDictionary.find(Prime) != PrimeToWordInstance->PrimeDictionary.end()) {
-			std::set<std::string> MatchedPrimeSet = PrimeToWordInstance->PrimeDictionary.at(Prime);
+		if (Result.find(Prime) == Result.end() && PrimedDictionaryInstance->PrimeDictionary.find(Prime) != PrimedDictionaryInstance->PrimeDictionary.end()) {
+			std::set<std::string> MatchedPrimeSet = PrimedDictionaryInstance->PrimeDictionary.at(Prime);
 			Result.insert(pair_mapm_setstring(Prime,MatchedPrimeSet));
 		}
 	}

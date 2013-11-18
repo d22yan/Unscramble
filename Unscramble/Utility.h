@@ -15,6 +15,7 @@ class Utility {
 		static void DisplayList(std::list<std::string>);
 		static void DisplaySet(std::set<std::string>);
 		static void IncrementBit(boost::dynamic_bitset<> &);
+		static void WriteSetToFile(std::string, std::set<std::string>);
 };
 
 bool Utility::IsValidWord(std::string word) {
@@ -130,7 +131,7 @@ void Utility::DisplaySet(std::set<std::string> set) {
 	}
 }
 
-void Utility::IncrementBit(boost::dynamic_bitset<> &input){
+void Utility::IncrementBit(boost::dynamic_bitset<> &input) {
 	for ( int i = 0; i < input.size(); i++ ) {
 		if ( input[i] == 0 ) {
 			input[i] = 1;

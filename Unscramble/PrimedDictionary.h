@@ -58,6 +58,10 @@ void PrimedDictionary::ConvertToPrimedDictionary() {
 		}
 		OStreamFile.close();
 	}
+	else {
+		std::cout << "Unable to find \"" << DictionaryFileName << "\" in path: " << ExecutionPath << std::endl;
+		std::exit(0);
+	}
 	IStreamFile.close();
 }
 
@@ -74,6 +78,10 @@ void PrimedDictionary::ReadDictionary() {
 				std::cout << Word << std::endl;
 			}
 		}
+	}
+	else {
+		std::cout << "Unable to find \"" << DictionaryFileName << "\" in path: " << ExecutionPath << std::endl;
+		std::exit(0);
 	}
 	IStreamFile.close();
 }
@@ -99,6 +107,10 @@ void PrimedDictionary::ReadPrimedDictionary() {
 				}
 			}
 		}
+	}	
+	else {
+		std::cout << "Unable to find \"" << PrimedDictionaryFileName << "\" in path: " << ExecutionPath << std::endl;
+		std::exit(0);
 	}
 	IStreamFile.close();
 }
