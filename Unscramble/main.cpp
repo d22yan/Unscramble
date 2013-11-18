@@ -2,9 +2,8 @@
 // remove console dispaly because it reduces performance
 // user interface
 // WriteSetToFile
-// Warning 15+ characters
 // search for 100k size dictionary
-// make function for exiting
+// make function for exiting + localize strings
 
 // http://stackoverflow.com/questions/1301277/c-boost-whats-the-cause-of-this-warning
 #if defined(_MSC_VER) && _MSC_VER >= 1400 
@@ -45,6 +44,8 @@ const std::string CommandHelp =
 const std::string OptionCommandHelp = "-h";
 const std::string OptionConvertToPrimedDictionary = "-c";
 const std::string OptionReadPrimedDictionary = "-p";
+const std::string UserAccept = "y";
+const std::string UserDecline = "n";
 
 const std::string PrimedDictionaryDelimiter = " ";
 const std::string PrimedDictionarySuffix = "Primed";
@@ -67,6 +68,7 @@ typedef std::pair<MAPM,std::set<std::string>> pair_mapm_setstring;
 #include "PrimedDictionary.h"
 #include "Unscramble.h"
 
+bool ConfirmExceeding15CharacterInput(std::string);
 bool ProcessArguments(int, char**);
 void Initiate();
 void SetDictionaryFileName(std::string);
@@ -75,6 +77,20 @@ void main(int argc, char** argv) {
 	if (ProcessArguments(argc, argv)) {
 		Initiate();
 	}
+}
+
+bool ConfirmExceeding15CharacterInput(std::string word) {
+	if ( word.size() <= 15 ) {
+		return true;
+	}
+	std::string input;
+	std::cout << "Depending on user's machine, entering 15+ characters could take a while to complete the process." << std::endl;
+	std::cout << "Enter 'y' to confirm and proceed: ";
+	std::cin >> input;
+	if ( input == UserAccept ) {
+		return true;
+	}
+	return false;
 }
 
 bool ProcessArguments(int argc, char** argv) {
@@ -108,7 +124,7 @@ void Initiate() {
 		std::cout << "input: ";
 		std::cin >> input;
 		std::cout << std::endl;
-		if ( Utility::IsValidWord(input) ) {
+		if ( Utility::IsValidWord(input) && ConfirmExceeding15CharacterInput(input) ) {
 			Unscrambler.UnscrambleString(input);
 			std::cout << std::endl;
 		}
