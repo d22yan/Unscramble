@@ -1,9 +1,7 @@
-// display in lexicographically order
-// remove console dispaly because it reduces performance
-// user interface
-// WriteSetToFile
-// search for 100k size dictionary
-// make function for exiting + localize strings
+// displaying the dictionary during read decreases performance
+// error handling
+// possible increase in performance, read x words per line
+// fuse word lists
 
 // http://stackoverflow.com/questions/1301277/c-boost-whats-the-cause-of-this-warning
 #if defined(_MSC_VER) && _MSC_VER >= 1400 
@@ -32,7 +30,7 @@
 
 #define ALPHABET_COUNT 26
 #define IOMANIP_SETW 30
-#define MAXIMUM_DIGIT 256
+#define MAXIMUM_DIGIT 64
 
 const std::string CommandHelp =
 	"Usage: Unscramble [OPTION]... [File]...\n"
@@ -42,14 +40,14 @@ const std::string CommandHelp =
 	"\t-p\t\tread from primed dictionary\n";
 
 const std::string OptionCommandHelp = "-h";
-const std::string OptionConvertToPrimedDictionary = "-c";
-const std::string OptionReadPrimedDictionary = "-p";
+const std::string OptionConvertToPrimedDictionary = "-c"; 
+const std::string OptionReadPrimedDictionary = "-p"; // reading a primed dictionary is slower than reading a dictionary
 const std::string UserAccept = "y";
 const std::string UserDecline = "n";
 
 const std::string PrimedDictionaryDelimiter = " ";
-const std::string PrimedDictionarySuffix = "Primed";
-const std::string LetterFrequencyListFileName = "LetterFrequencyList.txt";
+const std::string PrimedDictionarySuffix = "primed";
+const std::string LetterFrequencyListFileName = "letterfrequencylist.txt";
 
 const std::string ErrorInvalidLetterFrequencyVectorSize = "LetterFrequencyVector.size() != Alphabet_Count";
 
@@ -57,9 +55,9 @@ bool ConvertToPrimedDictionary = false;
 bool ReadDictionary = true;
 bool ReadPrimedDictionary = false;
 std::string ExecutionPath;
-std::string DictionaryFileName = "Dictionary.txt";
+std::string DictionaryFileName = "dictionary.txt";
 std::string PrimedDictionaryFileName = PrimedDictionarySuffix + DictionaryFileName;
-std::string ResultOutputFileName = "Output.txt";
+std::string ResultOutputFileName = "output.txt";
 
 typedef std::map<MAPM,std::set<std::string>> map_mapm_setstring;
 typedef std::pair<MAPM,std::set<std::string>> pair_mapm_setstring;
@@ -85,8 +83,8 @@ bool ConfirmExceeding15CharacterInput(std::string word) {
 		return true;
 	}
 	std::string input;
-	std::cout << "Depending on user's machine, entering 15+ characters could take a while to complete the process." << std::endl;
-	std::cout << "Enter 'y' to confirm and proceed: ";
+	std::cout << "Depending on the user's machine, entering 15+ characters could take a while to complete the unscramble." << std::endl;
+	std::cout << "Please enter 'y' to proceed: ";
 	std::cin >> input;
 	if ( input == UserAccept ) {
 		return true;

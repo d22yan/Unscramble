@@ -26,21 +26,21 @@ Unscramble::Unscramble() {
 void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	if(!Utility::IsValidWord(ScrambledWord)) { return; }
 	MAPM Prime;
-	std::set<std::string> AllCombinationSet = Utility::GenerateCombination(ScrambledWord);
-	map_mapm_setstring ResultDictionary;
+	std::set<MAPM> SearchedPrimeSet;
 	std::set<std::string> ResultSet;
+	std::set<std::string> AllCombinationSet = Utility::GenerateCombination(ScrambledWord);
 	for (std::set<std::string>::iterator iterator = AllCombinationSet.begin(), end = AllCombinationSet.end(); iterator != end; ++iterator) {
 		Prime = PrimedDictionary::WordToPrime(*iterator);
 		char PrimeString[MAXIMUM_DIGIT];
 		Prime.toIntegerString(PrimeString);
-		if (ResultDictionary.find(Prime) == ResultDictionary.end() && PrimedDictionaryInstance->PrimeDictionary.find(Prime) != PrimedDictionaryInstance->PrimeDictionary.end()) {
+		if (SearchedPrimeSet.find(Prime) == SearchedPrimeSet.end() && PrimedDictionaryInstance->PrimeDictionary.find(Prime) != PrimedDictionaryInstance->PrimeDictionary.end()) {
 			std::set<std::string> MatchedPrimeSet = PrimedDictionaryInstance->PrimeDictionary.at(Prime);
 			ResultSet.insert(MatchedPrimeSet.begin(), MatchedPrimeSet.end());
-			ResultDictionary.insert(pair_mapm_setstring(Prime,MatchedPrimeSet));
+			SearchedPrimeSet.insert(Prime);
 		}
 	}
-	//Utility::WriteSetToFile("output.txt", ResultSet); LNK2019 issue...
-	Utility::DisplayDictionary(ResultDictionary);
+	Utility::WriteSetToFile("output.txt", ResultSet); 
+	Utility::DisplaySet(ResultSet);
 }
 
 #endif 
