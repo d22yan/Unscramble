@@ -7,6 +7,8 @@
 #pragma warning(disable:4996) 
 #endif 
 
+#define __MAXIMUMDIGIT__ 64
+
 #include <algorithm>
 #include <fstream> 
 #include <iostream>
@@ -26,35 +28,20 @@
 // Referencing mapm.lib: Project > Properties > Configuration Options > Linker > Input > Additional Dependencies
 #include <M_APM.H> // http://www.tc.umn.edu/~ringx004/mapm-main.html
 
-#define ALPHABET_COUNT 26
-#define IOMANIP_SETW 30
-#define MAXIMUM_DIGIT 64
+#include "LetterFrequency.h"
+#include "PrimedDictionary.h"
+#include "Unscramble.h"
+#include "Utility.h"
 
+const std::string OptionCommandHelp = "-h";
+const std::string UserAccept = "y";
+const std::string UserDecline = "n";
 const std::string CommandHelp =
 	"Usage: Unscramble [File]\n"
 	"Unscramble randomized letters into all possible words found in [FILE].\n"
 	"Inputs:\n"
 	"\t[a-zA-Z]+\treturn all possible words\n"
 	"\t:q\t\tquit";
-
-const std::string OptionCommandHelp = "-h";
-const std::string UserAccept = "y";
-const std::string UserDecline = "n";
-
-const std::string ErrorInvalidLetterFrequencyVectorSize = "LetterFrequencyVector.size() != Alphabet_Count";
-
-bool ReadDictionary = true;
-std::string ExecutionPath;
-std::string DictionaryFileName = "dictionary.txt";
-std::string ResultOutputFileName = "output.txt";
-
-typedef std::map<MAPM,std::set<std::string>> map_mapm_setstring;
-typedef std::pair<MAPM,std::set<std::string>> pair_mapm_setstring;
-
-#include "Utility.h"
-#include "LetterFrequency.h"
-#include "PrimedDictionary.h"
-#include "Unscramble.h"
 
 bool ConfirmExceeding15CharacterInput(std::string);
 bool ProcessArguments(int, char**);

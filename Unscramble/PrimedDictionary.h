@@ -1,5 +1,15 @@
-#ifndef _PRIMED_DICTIONARY_H
-#define _PRIMED_DICTIONARY_H
+#ifndef __PRIMEDDICTIONARY_H_INCLUDED__
+#define __PRIMEDDICTIONARY_H_INCLUDED__
+
+#ifndef __MAXIMUMDIGIT__
+#define __MAXIMUMDIGIT__ 256
+#endif
+
+#include "LetterFrequency.h"
+#include "Utility.h"
+
+std::string DictionaryFileName = "dictionary.txt";
+std::string ExecutionPath;
 
 class PrimedDictionary {
 	private:
@@ -8,7 +18,7 @@ class PrimedDictionary {
 		static bool instanceFlag;
 		static PrimedDictionary* single;
 	public:
-		map_mapm_setstring PrimeDictionary;
+		std::map<MAPM,std::set<std::string>> PrimeDictionary;
 		static PrimedDictionary* GetInstance();
 		static void ReadDictionary();
 		void InsertWord(std::string);
@@ -71,12 +81,12 @@ void PrimedDictionary::InsertWord(std::string word) {
 }
 
 void PrimedDictionary::InsertPrimeAndWord(MAPM Prime, std::string word) {
-	char PrimeString[MAXIMUM_DIGIT];
+	char PrimeString[__MAXIMUMDIGIT__];
 	Prime.toIntegerString(PrimeString);
 	if (PrimeDictionary.find(Prime) == PrimeDictionary.end()) {
 		std::set<std::string> NewSet;
 		NewSet.insert(word);
-		PrimeDictionary.insert(pair_mapm_setstring(WordToPrime(word),NewSet));
+		PrimeDictionary.insert(std::pair<MAPM,std::set<std::string>>(WordToPrime(word),NewSet));
 	}
 	else {
 		PrimeDictionary.at(Prime).insert(word);

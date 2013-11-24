@@ -1,5 +1,15 @@
-#ifndef _UNSCRAMBLE_H
-#define _UNSCRAMBLE_H
+#ifndef __UNSCRAMBLE_H_INCLUDED__
+#define __UNSCRAMBLE_H_INCLUDED__
+
+#ifndef __MAXIMUMDIGIT__
+#define __MAXIMUMDIGIT__ 256
+#endif
+
+#include "PrimedDictionary.h"
+#include "Utility.h"
+
+bool ReadDictionary = true;
+std::string ResultOutputFileName = "output.txt";
 
 class Unscramble {
 	private:
@@ -10,9 +20,9 @@ class Unscramble {
 };
 
 Unscramble::Unscramble() {
-	m_apm_cpp_precision(MAXIMUM_DIGIT);
+	m_apm_cpp_precision(__MAXIMUMDIGIT__);
 	PrimedDictionaryInstance = PrimedDictionary::GetInstance();
-	if ( ReadDictionary) {
+	if (ReadDictionary) {
 		PrimedDictionary::ReadDictionary();
 	}
 }
@@ -25,7 +35,7 @@ void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	std::set<std::string> AllCombinationSet = Utility::GenerateCombination(ScrambledWord);
 	for (std::set<std::string>::iterator iterator = AllCombinationSet.begin(), end = AllCombinationSet.end(); iterator != end; ++iterator) {
 		Prime = PrimedDictionary::WordToPrime(*iterator);
-		char PrimeString[MAXIMUM_DIGIT];
+		char PrimeString[__MAXIMUMDIGIT__];
 		Prime.toIntegerString(PrimeString);
 		if (SearchedPrimeSet.find(Prime) == SearchedPrimeSet.end() && PrimedDictionaryInstance->PrimeDictionary.find(Prime) != PrimedDictionaryInstance->PrimeDictionary.end()) {
 			std::set<std::string> MatchedPrimeSet = PrimedDictionaryInstance->PrimeDictionary.at(Prime);

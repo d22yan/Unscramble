@@ -1,5 +1,5 @@
-#ifndef _UTILITY_H
-#define _UTILITY_H
+#ifndef __UTILITY_H_INCLUDED__
+#define __UTILITY_H_INCLUDED__
 
 // portablility - include necessary files
 // GeneratePrimes - Add range parameter
@@ -16,7 +16,7 @@ class Utility {
 		static std::set<std::string> GeneratePermutation(std::string);
 		static std::vector<int> GeneratePrimes(int);
 		static std::vector<std::string> SplitStringToVector(std::string, std::string);
-		static void DisplayDictionary(map_mapm_setstring);
+		static void DisplayDictionary(std::map<MAPM,std::set<std::string>>);
 		static void DisplayList(std::list<std::string>);
 		static void DisplaySet(std::set<std::string>);
 		static void IncrementBit(boost::dynamic_bitset<> &);
@@ -128,8 +128,8 @@ std::vector<std::string> Utility::SplitStringToVector(std::string delimiter, std
 	return WordVector;
 }
 
-void Utility::DisplayDictionary(map_mapm_setstring dictionary) {
-	for (map_mapm_setstring::iterator iterator = dictionary.begin(), end = dictionary.end(); iterator != end; ++iterator) {
+void Utility::DisplayDictionary(std::map<MAPM,std::set<std::string>> dictionary) {
+	for (std::map<MAPM,std::set<std::string>>::iterator iterator = dictionary.begin(), end = dictionary.end(); iterator != end; ++iterator) {
 		std::set<std::string> WordList = iterator->second;
 		for (std::set<std::string>::iterator iterator = WordList.begin(), end = WordList.end(); iterator != end; ++iterator) {
 			std::cout << *iterator << std::endl;

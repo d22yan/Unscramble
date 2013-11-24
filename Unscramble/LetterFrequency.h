@@ -1,5 +1,13 @@
-#ifndef _COMMON_ALPHABET_H
-#define _COMMON_ALPHABET_H
+#ifndef __LETTERFREQUENCY_H_INCLUDED__
+#define __LETTERFREQUENCY_H_INCLUDED__
+
+#ifndef __ALPHABETCOUNT__
+#define __ALPHABETCOUNT__ 26
+#endif
+
+#include "Utility.h"
+
+const std::string ErrorInvalidLetterFrequencyVectorSize = "LetterFrequencyVector.size() != Alphabet_Count";
 
 class LetterFrequency {
 	private:
@@ -34,10 +42,10 @@ LetterFrequency* LetterFrequency::GetInstance() {
 
 void LetterFrequency::GenerateLetterPrimeDictionary() {
 	LetterFrequency *CommonAlphabetInstance = LetterFrequency::GetInstance();
-	std::vector<int> PrimeNumbersVector = Utility::GeneratePrimes(ALPHABET_COUNT);
+	std::vector<int> PrimeNumbersVector = Utility::GeneratePrimes(__ALPHABETCOUNT__);
 	std::vector<char> LetterFrequencyVector = GenerateLetterFrequency();
-	assert(LetterFrequencyVector.size() == ALPHABET_COUNT, ErrorInvalidLetterFrequencyVectorSize);
-	for (int i = 0; i < ALPHABET_COUNT; i++) {
+	assert(LetterFrequencyVector.size() == __ALPHABETCOUNT__, ErrorInvalidLetterFrequencyVectorSize);
+	for (int i = 0; i < __ALPHABETCOUNT__; i++) {
 		CommonAlphabetInstance->LetterPrimeDictionary.insert(std::pair<char,int>(LetterFrequencyVector.at(i),PrimeNumbersVector.at(i)));
 	}
 }
