@@ -1,5 +1,6 @@
 // displaying the dictionary during read decreases performance
 // error handling
+// getline vs get vs >>
 
 // http://stackoverflow.com/questions/1301277/c-boost-whats-the-cause-of-this-warning
 #if defined(_MSC_VER) && _MSC_VER >= 1400 
@@ -12,7 +13,6 @@
 #include <algorithm>
 #include <fstream> 
 #include <iostream>
-#include <iomanip> // setw()
 #include <list>
 #include <map>
 #include <set>

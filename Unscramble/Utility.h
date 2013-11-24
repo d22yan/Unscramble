@@ -1,6 +1,10 @@
 #ifndef __UTILITY_H_INCLUDED__
 #define __UTILITY_H_INCLUDED__
 
+#ifndef __MAXIMUMDIGIT__
+#define __MAXIMUMDIGIT__ 256
+#endif
+
 // portablility - include necessary files
 // GeneratePrimes - Add range parameter
 
@@ -9,7 +13,7 @@ class Utility {
 		static bool IsValidWord(std::string);
 		static std::string BinaryMaskString(boost::dynamic_bitset<>, std::vector<char>);
 		static std::string CharToString(char);
-		static std::string MapmToString(int, MAPM);
+		static std::string MapmToString(MAPM);
 		static std::string SortCharacters(std::string);
 		static std::string ToLowerCase(std::string);
 		static std::set<std::string> GenerateCombination(std::string);
@@ -51,11 +55,11 @@ std::string Utility::CharToString(char character) {
 	return OutputString;
 }
 
-std::string Utility::MapmToString(int maximumdigit, MAPM number) {
-	char string[256];
-	number.toIntegerString(string);
-	std::string NewLine(string);
-	return "ASD";
+std::string Utility::MapmToString(MAPM number) {
+	char Digits[__MAXIMUMDIGIT__];
+	number.toIntegerString(Digits);
+	std::string NumberString(Digits);
+	return NumberString;
 }
 
 std::string Utility::SortCharacters(std::string input) {

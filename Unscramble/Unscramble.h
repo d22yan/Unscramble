@@ -35,8 +35,6 @@ void Unscramble::UnscrambleString(std::string ScrambledWord) {
 	std::set<std::string> AllCombinationSet = Utility::GenerateCombination(ScrambledWord);
 	for (std::set<std::string>::iterator iterator = AllCombinationSet.begin(), end = AllCombinationSet.end(); iterator != end; ++iterator) {
 		Prime = PrimedDictionary::WordToPrime(*iterator);
-		char PrimeString[__MAXIMUMDIGIT__];
-		Prime.toIntegerString(PrimeString);
 		if (SearchedPrimeSet.find(Prime) == SearchedPrimeSet.end() && PrimedDictionaryInstance->PrimeDictionary.find(Prime) != PrimedDictionaryInstance->PrimeDictionary.end()) {
 			std::set<std::string> MatchedPrimeSet = PrimedDictionaryInstance->PrimeDictionary.at(Prime);
 			ResultSet.insert(MatchedPrimeSet.begin(), MatchedPrimeSet.end());

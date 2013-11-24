@@ -1,7 +1,7 @@
 ﻿  main.cpp
-c:\git\unscramble\unscramble\utility.h(38): warning C4018: '<' : signed/unsigned mismatch
-c:\git\unscramble\unscramble\utility.h(110): warning C4018: '<' : signed/unsigned mismatch
-c:\git\unscramble\unscramble\utility.h(153): warning C4018: '<' : signed/unsigned mismatch
+c:\git\unscramble\unscramble\utility.h(42): warning C4018: '<' : signed/unsigned mismatch
+c:\git\unscramble\unscramble\utility.h(114): warning C4018: '<' : signed/unsigned mismatch
+c:\git\unscramble\unscramble\utility.h(157): warning C4018: '<' : signed/unsigned mismatch
 c:\git\unscramble\unscramble\letterfrequency.h(47): warning C4002: too many actual parameters for macro 'assert'
 c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(180): warning C4800: 'int' : forcing value to bool 'true' or 'false' (performance warning)
           c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(179) : while compiling class template member function 'bool std::less<_Ty>::operator ()(const _Ty &,const _Ty &) const'
@@ -29,7 +29,7 @@ c:\program files (x86)\microsoft visual studio 11.0\vc\include\xstddef(180): war
           [
               _Traits=std::_Tmap_traits<MAPM,std::set<std::string>,std::less<MAPM>,std::allocator<std::pair<const MAPM,std::set<std::string>>>,false>
           ]
-          c:\git\unscramble\unscramble\utility.h(131) : see reference to class template instantiation 'std::map<_Kty,_Ty>' being compiled
+          c:\git\unscramble\unscramble\utility.h(135) : see reference to class template instantiation 'std::map<_Kty,_Ty>' being compiled
           with
           [
               _Kty=MAPM,

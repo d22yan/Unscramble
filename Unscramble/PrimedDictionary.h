@@ -81,8 +81,6 @@ void PrimedDictionary::InsertWord(std::string word) {
 }
 
 void PrimedDictionary::InsertPrimeAndWord(MAPM Prime, std::string word) {
-	char PrimeString[__MAXIMUMDIGIT__];
-	Prime.toIntegerString(PrimeString);
 	if (PrimeDictionary.find(Prime) == PrimeDictionary.end()) {
 		std::set<std::string> NewSet;
 		NewSet.insert(word);
