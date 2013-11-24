@@ -1,16 +1,21 @@
 #ifndef _UTILITY_H
 #define _UTILITY_H
 
+// portablility - include necessary files
+// GeneratePrimes - Add range parameter
+
 class Utility {
 	public:
 		static bool IsValidWord(std::string);
 		static std::string BinaryMaskString(boost::dynamic_bitset<>, std::vector<char>);
 		static std::string CharToString(char);
+		static std::string MapmToString(int, MAPM);
 		static std::string SortCharacters(std::string);
 		static std::string ToLowerCase(std::string);
 		static std::set<std::string> GenerateCombination(std::string);
 		static std::set<std::string> GeneratePermutation(std::string);
 		static std::vector<int> GeneratePrimes(int);
+		static std::vector<std::string> SplitStringToVector(std::string, std::string);
 		static void DisplayDictionary(map_mapm_setstring);
 		static void DisplayList(std::list<std::string>);
 		static void DisplaySet(std::set<std::string>);
@@ -46,6 +51,13 @@ std::string Utility::CharToString(char character) {
 	return OutputString;
 }
 
+std::string Utility::MapmToString(int maximumdigit, MAPM number) {
+	char string[256];
+	number.toIntegerString(string);
+	std::string NewLine(string);
+	return "ASD";
+}
+
 std::string Utility::SortCharacters(std::string input) {
 	std::string SortedCharacters = input;
 	std::sort(input.begin(), input.end());
@@ -56,29 +68,6 @@ std::string Utility::ToLowerCase(std::string input) {
 	std::string LoweredCase = input;
 	transform(LoweredCase.begin(), LoweredCase.end(), LoweredCase.begin(), ::tolower);
 	return LoweredCase;
-}
-
-std::vector<int> Utility::GeneratePrimes(int size) {
-	std::vector<int> prime(0,0);
-	int counter = 3;
-	bool flag = false;
-	prime.push_back(2);
-	size--;
-	while( size ) {
-		flag = false;
-		for( int i = 0 ; i < prime.size() ; i++ ) {
-			if ( !(counter%(prime.at(i))) ) {
-				flag = true;
-				break;
-			}
-		}
-		if ( !flag ) {
-			prime.push_back(counter);
-			size--;
-		}
-		counter+=2;
-	}
-	return prime;
 }
 
 std::set<std::string> Utility::GenerateCombination(std::string word) {
@@ -108,6 +97,35 @@ std::set<std::string> Utility::GeneratePermutation(std::string word) {
 		PermutationSet.insert(SortedString);
 	}
 	return PermutationSet;
+}
+
+std::vector<int> Utility::GeneratePrimes(int size) {
+	std::vector<int> prime;
+	int counter = 3;
+	bool flag = false;
+	prime.push_back(2);
+	size--;
+	while( size ) {
+		flag = false;
+		for( int i = 0 ; i < prime.size() ; i++ ) {
+			if ( !(counter%(prime.at(i))) ) {
+				flag = true;
+				break;
+			}
+		}
+		if ( !flag ) {
+			prime.push_back(counter);
+			size--;
+		}
+		counter+=2;
+	}
+	return prime;
+}
+
+std::vector<std::string> Utility::SplitStringToVector(std::string delimiter, std::string input) {
+	std::vector<std::string> WordVector;
+	boost::split(WordVector, input, boost::is_any_of(delimiter));
+	return WordVector;
 }
 
 void Utility::DisplayDictionary(map_mapm_setstring dictionary) {

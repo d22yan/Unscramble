@@ -3,12 +3,11 @@
 
 class LetterFrequency {
 	private:
-		LetterFrequency();
+		LetterFrequency() {};
 		~LetterFrequency();
 		static bool instanceFlag;
 		static LetterFrequency* single;
 		static void GenerateLetterPrimeDictionary();
-		static std::vector<char> ReadLetterFrequencyList();
 	public:
 		std::map<char, int> LetterPrimeDictionary;
 		static LetterFrequency *GetInstance();
@@ -17,10 +16,6 @@ class LetterFrequency {
 
 bool LetterFrequency::instanceFlag = false;
 LetterFrequency* LetterFrequency::single = NULL;
-
-LetterFrequency::LetterFrequency() {
-	ReadLetterFrequencyList();
-}
 
 LetterFrequency::~LetterFrequency() {
 	delete single;
@@ -76,23 +71,6 @@ std::vector<char> LetterFrequency::GenerateLetterFrequency() {
 	myvector.push_back('q');
 	myvector.push_back('z');
 	return myvector;
-}
-
-std::vector<char> LetterFrequency::ReadLetterFrequencyList() {
-	std::vector<char> LetterFrequencyVector;
-	std::ifstream IStreamFile(LetterFrequencyListFileName);
-	if(IStreamFile.is_open()) {
-		std::string Line;
-		while (!IStreamFile.eof()) {
-			IStreamFile >> Line;
-			char Letter = Line[0];
-			if (isalpha(Letter)) {
-				LetterFrequencyVector.push_back(Letter);
-			}
-		}
-	}
-	IStreamFile.close();
-	return LetterFrequencyVector;
 }
 
 #endif

@@ -10,9 +10,7 @@ class PrimedDictionary {
 	public:
 		map_mapm_setstring PrimeDictionary;
 		static PrimedDictionary* GetInstance();
-		static void ConvertToPrimedDictionary();
 		static void ReadDictionary();
-		static void ReadPrimedDictionary();
 		void InsertWord(std::string);
 		void InsertPrimeAndWord(MAPM,std::string);
 		static MAPM WordToPrime(std::string);
@@ -35,36 +33,6 @@ PrimedDictionary* PrimedDictionary::GetInstance() {
 	return single;
 }
 
-void PrimedDictionary::ConvertToPrimedDictionary() {
-	std::ifstream IStreamFile(DictionaryFileName);
-	if(IStreamFile.is_open()) {
-		std::string NewDictionaryFileName = PrimedDictionarySuffix + DictionaryFileName;
-		std::ofstream OStreamFile(NewDictionaryFileName);
-		if (OStreamFile.is_open()) {
-			std::string Word;
-			int counter = 0;
-			while(!IStreamFile.eof()) {
-				IStreamFile >> Word;
-				if ( Utility::IsValidWord(Word) ) {
-					MAPM Prime = single->WordToPrime(Word);
-					char PrimeString[MAXIMUM_DIGIT];
-					Prime.toIntegerString(PrimeString);
-					std::string NewLine(PrimeString);
-					NewLine.append(PrimedDictionaryDelimiter + Word);
-					OStreamFile << NewLine << std::endl;
-					std::cout << counter++ << " " << NewLine << std::endl;
-				}
-			}
-		}
-		OStreamFile.close();
-	}
-	else {
-		std::cout << "Unable to find \"" << DictionaryFileName << "\" in path: " << ExecutionPath << std::endl;
-		std::exit(0);
-	}
-	IStreamFile.close();
-}
-
 void PrimedDictionary::ReadDictionary() {
 	std::ifstream IStreamFile;
 	IStreamFile.open(DictionaryFileName);
@@ -72,7 +40,7 @@ void PrimedDictionary::ReadDictionary() {
 		std::string Line;
 		while(!IStreamFile.eof()) {
 			IStreamFile >> Line;
-			if ( Utility::IsValidWord(Line) ) {
+			if(Utility::IsValidWord(Line)) {
 				std::string Word = Utility::ToLowerCase(Line);
 				single->InsertWord(Word);
 				std::cout << Word << std::endl;
@@ -81,35 +49,6 @@ void PrimedDictionary::ReadDictionary() {
 	}
 	else {
 		std::cout << "Unable to find \"" << DictionaryFileName << "\" in path: " << ExecutionPath << std::endl;
-		std::exit(0);
-	}
-	IStreamFile.close();
-}
-
-void PrimedDictionary::ReadPrimedDictionary() {
-	std::ifstream IStreamFile;
-	IStreamFile.open(PrimedDictionaryFileName);
-	if (IStreamFile.is_open()) {
-		std::string Line;
-		int counter = 0;
-		while(!IStreamFile.eof()) {
-			std::getline(IStreamFile, Line);
-			std::vector<std::string> SplitLine;
-			boost::split(SplitLine, Line, boost::is_any_of(" "));
-			if (SplitLine.size() == 2) {
-				if ( Utility::IsValidWord(SplitLine.at(1)) ) {
-					std::string PrimeString = SplitLine.at(0);
-					std::string Word = Utility::ToLowerCase(SplitLine.at(1));
-					const char* PrimeChars = PrimeString.c_str();
-					MAPM Prime = PrimeChars;
-					std::cout << counter++ << std::setw(IOMANIP_SETW) << PrimeChars << std::setw(IOMANIP_SETW) << Word << std::endl;
-					single->InsertPrimeAndWord(Prime, Word);
-				}
-			}
-		}
-	}	
-	else {
-		std::cout << "Unable to find \"" << PrimedDictionaryFileName << "\" in path: " << ExecutionPath << std::endl;
 		std::exit(0);
 	}
 	IStreamFile.close();

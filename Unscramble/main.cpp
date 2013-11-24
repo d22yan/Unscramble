@@ -1,7 +1,5 @@
 // displaying the dictionary during read decreases performance
 // error handling
-// possible increase in performance, read x words per line
-// fuse word lists
 
 // http://stackoverflow.com/questions/1301277/c-boost-whats-the-cause-of-this-warning
 #if defined(_MSC_VER) && _MSC_VER >= 1400 
@@ -33,30 +31,21 @@
 #define MAXIMUM_DIGIT 64
 
 const std::string CommandHelp =
-	"Usage: Unscramble [OPTION]... [File]...\n"
-	"Unscramble randomized letters into all possible words.\n\n"
-	"Options\n"
-	"\t-c\t\tconvert to a primed dictionary from FILE\n"
-	"\t-p\t\tread from primed dictionary\n";
+	"Usage: Unscramble [File]\n"
+	"Unscramble randomized letters into all possible words found in [FILE].\n"
+	"Inputs:\n"
+	"\t[a-zA-Z]+\treturn all possible words\n"
+	"\t:q\t\tquit";
 
 const std::string OptionCommandHelp = "-h";
-const std::string OptionConvertToPrimedDictionary = "-c"; 
-const std::string OptionReadPrimedDictionary = "-p"; // reading a primed dictionary is slower than reading a dictionary
 const std::string UserAccept = "y";
 const std::string UserDecline = "n";
 
-const std::string PrimedDictionaryDelimiter = " ";
-const std::string PrimedDictionarySuffix = "primed";
-const std::string LetterFrequencyListFileName = "letterfrequencylist.txt";
-
 const std::string ErrorInvalidLetterFrequencyVectorSize = "LetterFrequencyVector.size() != Alphabet_Count";
 
-bool ConvertToPrimedDictionary = false;
 bool ReadDictionary = true;
-bool ReadPrimedDictionary = false;
 std::string ExecutionPath;
 std::string DictionaryFileName = "dictionary.txt";
-std::string PrimedDictionaryFileName = PrimedDictionarySuffix + DictionaryFileName;
 std::string ResultOutputFileName = "output.txt";
 
 typedef std::map<MAPM,std::set<std::string>> map_mapm_setstring;
@@ -70,7 +59,6 @@ typedef std::pair<MAPM,std::set<std::string>> pair_mapm_setstring;
 bool ConfirmExceeding15CharacterInput(std::string);
 bool ProcessArguments(int, char**);
 void Initiate();
-void SetDictionaryFileName(std::string);
 
 void main(int argc, char** argv) {
 	if (ProcessArguments(argc, argv)) {
@@ -101,15 +89,8 @@ bool ProcessArguments(int argc, char** argv) {
 			std::cout << CommandHelp << std::endl;
 			return false;
 		}
-		else if (option == OptionConvertToPrimedDictionary) {
-			ConvertToPrimedDictionary = true;
-		}
-		else if (option == OptionReadPrimedDictionary) {
-			ReadDictionary = false;
-			ReadPrimedDictionary = true;
-		}
 		else {
-			SetDictionaryFileName(option);
+			DictionaryFileName = option;
 		}
 	}
 	return true;
@@ -132,11 +113,6 @@ void Initiate() {
 		std::cin >> input;
 		std::cout << std::endl;
 	}
-}
-
-void SetDictionaryFileName(std::string filename) {
-	DictionaryFileName = filename;
-	PrimedDictionaryFileName = PrimedDictionarySuffix + DictionaryFileName;
 }
 
 #if defined(_MSC_VER) && _MSC_VER >= 1400 
