@@ -8,7 +8,7 @@
 #include "LetterFrequency.h"
 #include "Utility.h"
 
-std::string DictionaryFileName = "dictionary.txt";
+std::string DefaultDictionaryFileName = "dictionary.txt";
 std::string ExecutionPath;
 
 class PrimedDictionary {
@@ -45,7 +45,7 @@ PrimedDictionary* PrimedDictionary::GetInstance() {
 
 void PrimedDictionary::ReadDictionary() {
 	std::ifstream IStreamFile;
-	IStreamFile.open(DictionaryFileName);
+	IStreamFile.open(DefaultDictionaryFileName);
 	if (IStreamFile.is_open()) {
 		std::string Line;
 		while(!IStreamFile.eof()) {
@@ -58,7 +58,7 @@ void PrimedDictionary::ReadDictionary() {
 		}
 	}
 	else {
-		std::cout << "Unable to find \"" << DictionaryFileName << "\" in path: " << ExecutionPath << std::endl;
+		std::cout << "Unable to find \"" << DefaultDictionaryFileName << "\" in path: " << ExecutionPath << std::endl;
 		std::exit(0);
 	}
 	IStreamFile.close();

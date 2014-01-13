@@ -1,3 +1,6 @@
+// portablility - include necessary files
+// GeneratePrimes - Add range parameter
+
 #ifndef __UTILITY_H_INCLUDED__
 #define __UTILITY_H_INCLUDED__
 
@@ -5,12 +8,10 @@
 #define __MAXIMUMDIGIT__ 256
 #endif
 
-// portablility - include necessary files
-// GeneratePrimes - Add range parameter
-
 class Utility {
 	public:
 		static bool IsValidWord(std::string);
+		static MAPM MAPMpow(MAPM, MAPM);
 		static std::string BinaryMaskString(boost::dynamic_bitset<>, std::vector<char>);
 		static std::string CharToString(char);
 		static std::string MapmToString(MAPM);
@@ -35,6 +36,14 @@ bool Utility::IsValidWord(std::string word) {
 		}
 	}
 	return true;
+}
+
+MAPM MAPMpow(MAPM base, MAPM exponent) {
+	MAPM result = 1;
+	for(MAPM counter = 0; counter < exponent; counter++) {
+		result *= base;
+	}
+	return result;
 }
 
 std::string Utility::BinaryMaskString(boost::dynamic_bitset<> binary, std::vector<char> wordvector) {
